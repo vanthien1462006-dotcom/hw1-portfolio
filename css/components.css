@@ -1,1 +1,307 @@
-/* stub: filled in T-05 */
+/* Component styles. Colors come from tokens.css only. */
+
+/* Typography */
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+}
+
+h2 {
+  font-family: var(--font-mono);
+  font-size: var(--step-3);
+}
+
+h2::before {
+  content: "// ";
+  content: "// " / "";
+  color: var(--accent-2);
+}
+
+h3 {
+  font-size: var(--step-1);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.18em;
+}
+
+/* Global focus indicator */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Skip link */
+.skip-link {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  text-decoration: none;
+  border-end-end-radius: var(--radius-md);
+}
+
+/* Header and navigation */
+header > p {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: var(--space-2);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* Theme toggle: moon while light is active, sun while dark is active */
+#theme-btn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+#theme-btn:hover {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+#theme-btn:active {
+  background-color: var(--bg);
+}
+
+#theme-btn[aria-pressed="false"] svg:nth-of-type(2),
+#theme-btn[aria-pressed="true"] svg:nth-of-type(1) {
+  display: none;
+}
+
+/* Hero */
+#hero > p:first-of-type {
+  padding: var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+}
+
+#hero > p:first-of-type::after {
+  content: "";
+  display: inline-block;
+  inline-size: 0.6em;
+  block-size: 1.1em;
+  margin-inline-start: var(--space-1);
+  background-color: var(--accent);
+  vertical-align: text-bottom;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #hero > p:first-of-type::after {
+    animation: cursor-blink 1.06s steps(1) infinite;
+  }
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#hero img {
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glow);
+}
+
+#hero figcaption {
+  margin-block-start: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+/* Buttons and button-like links */
+#hero > p > a,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+#hero > p > a:hover,
+button[type="submit"]:hover {
+  box-shadow: var(--glow);
+  background-color: color-mix(in srgb, var(--accent) 85%, var(--text));
+}
+
+#hero > p > a:active,
+button[type="submit"]:active {
+  background-color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  box-shadow: none;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* About */
+dt {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+dd {
+  font-weight: 600;
+}
+
+/* Badges and skill pills */
+.badge,
+#skills li {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--accent-2);
+  border-radius: 100vmax;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+/* Project cards */
+.project-card {
+  padding: var(--space-5);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--glow), var(--shadow-md);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-card {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: translateY(-4px);
+  }
+}
+
+.project-card a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+}
+
+/* Form */
+label {
+  font-weight: 600;
+}
+
+input,
+textarea {
+  inline-size: 100%;
+  min-block-size: 44px;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+}
+
+textarea {
+  min-block-size: 8rem;
+  resize: vertical;
+}
+
+input:hover,
+textarea:hover {
+  border-color: var(--accent);
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  border-width: 2px;
+}
+
+.field-hint {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+#form-status {
+  font-weight: 600;
+}
+
+#form-status[data-state="success"] {
+  color: var(--success);
+}
+
+#form-status[data-state="error"] {
+  color: var(--danger);
+}
+
+/* Footer */
+body > footer {
+  color: var(--text-muted);
+  border-block-start: 1px solid var(--border);
+}
+
+body > footer a {
+  color: inherit;
+}
+
+address {
+  font-style: normal;
+}
