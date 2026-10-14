@@ -1,1 +1,249 @@
-/* stub: filled in T-04 */
+/* Layout only: positioning, grids and spacing. Colors come from tokens.css. */
+
+:root {
+  --header-offset: 9rem;
+  --content-max: 70rem;
+  --card-min: 17.5rem;
+}
+
+html {
+  scroll-padding-top: var(--header-offset);
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  background-attachment: scroll;
+  color: var(--text);
+}
+
+/* Skip link: off-screen until focused */
+.skip-link {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 20;
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Header */
+body > header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--bg-elevated);
+  border-block-end: 1px solid var(--border);
+}
+
+body > header > p {
+  flex: 1 1 100%;
+}
+
+body > header > nav {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  overflow-x: auto;
+}
+
+nav ul {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+/* Page sections */
+main > section {
+  display: grid;
+  gap: var(--space-4);
+  max-inline-size: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-7);
+}
+
+/* Hero */
+#hero > p:has(> a) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+#hero img {
+  aspect-ratio: 1;
+  inline-size: 100%;
+  max-inline-size: 25rem;
+}
+
+/* About */
+#about dl {
+  display: grid;
+  gap: var(--space-1) var(--space-5);
+}
+
+/* Skills: each group is an h3 followed by a ul */
+#skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+/* Projects */
+#projects {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--card-min)), 1fr));
+  gap: var(--space-5);
+}
+
+#projects > h2 {
+  grid-column: 1 / -1;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.project-card > header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.project-card > footer {
+  margin-block-start: auto;
+}
+
+/* Contact form */
+#contact-form {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field-error {
+  min-block-size: 1.6em;
+}
+
+/* Footer */
+body > footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  padding: var(--space-5) var(--space-4);
+}
+
+@media (min-width: 40rem) {
+  #about dl {
+    grid-template-columns: max-content 1fr;
+  }
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --header-offset: 6rem;
+  }
+
+  body > header > p,
+  body > header > nav {
+    flex: 0 1 auto;
+  }
+
+  main > section {
+    padding-inline: var(--space-6);
+  }
+
+  /* Hero: text column and image column */
+  #hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 25rem);
+    align-content: center;
+    column-gap: var(--space-6);
+  }
+
+  #hero > * {
+    grid-column: 1;
+  }
+
+  #hero > figure {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+  }
+
+  /* Skills: one column per group, h2 spans the top row */
+  #skills {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--space-5);
+  }
+
+  #skills > h2 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* Contact: name and email share a row */
+  #contact-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-5);
+  }
+
+  #contact-form > label[for="name"],
+  #name,
+  #name-hint,
+  #name-error {
+    grid-column: 1;
+  }
+
+  #contact-form > label[for="email"],
+  #email,
+  #email-hint,
+  #email-error {
+    grid-column: 2;
+  }
+
+  #contact-form > label[for="name"],
+  #contact-form > label[for="email"] {
+    grid-row: 1;
+  }
+
+  #name,
+  #email {
+    grid-row: 2;
+  }
+
+  #name-hint,
+  #email-hint {
+    grid-row: 3;
+  }
+
+  #name-error,
+  #email-error {
+    grid-row: 4;
+  }
+
+  #contact-form > label[for="message"],
+  #message,
+  #message-hint,
+  #message-error,
+  #contact-form > button,
+  #form-status {
+    grid-column: 1 / -1;
+  }
+}
