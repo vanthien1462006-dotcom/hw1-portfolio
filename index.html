@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vo Van Thien | Full-Stack Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Vo Van Thien, an Information Systems student at UIT, VNU-HCM, focused on full-stack web development.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/theme.js"></script>
+  <script type="module" src="js/contact-form.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <h1>Vo Van Thien</h1>
+    <p>Information Systems student building for the web</p>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button type="button" id="theme-btn" aria-pressed="false">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/></svg>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="visually-hidden">Theme</span>
+    </button>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section id="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Full-Stack Developer in the making</h2>
+      <p>I am a student who enjoys turning ideas into working web products, from game mechanics to community platforms and data tools. I am learning to build both the interface and the logic behind it.</p>
+      <p>
+        <a href="#projects">View projects</a>
+        <a href="#contact">Contact me</a>
+      </p>
+      <figure>
+        <img src="assets/avatar.svg" alt="Illustrated avatar of Vo Van Thien" width="400" height="400">
+        <figcaption>Abstract avatar in navy, cyan and violet.</figcaption>
+      </figure>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <dl>
+        <dt>Student code</dt>
+        <dd>24521671</dd>
+        <dt>Faculty</dt>
+        <dd>Information Systems</dd>
+        <dt>University</dt>
+        <dd>University of Information Technology (UIT), VNU-HCM</dd>
+        <dt>Focus</dt>
+        <dd>Full-Stack Development</dd>
+      </dl>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <h3>Frontend</h3>
+      <ul>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>JavaScript ES6+</li>
+      </ul>
+      <h3>Backend &amp; Data</h3>
+      <ul>
+        <li>Python</li>
+        <li>Web scraping</li>
+      </ul>
+      <h3>Tools</h3>
+      <ul>
+        <li>Git and GitHub</li>
+      </ul>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+
+      <article class="project-card">
+        <header>
+          <h3>Chuck King</h3>
+          <span class="badge">Game</span>
+        </header>
+        <p>A web-based 2D vertical rage platformer inspired by Jump King. Hold a key to charge the jump, release to jump. If you fall, you lose all your progress.</p>
+        <footer>
+          <a href="#" aria-label="Source code for Chuck King">Source code</a>
+        </footer>
+      </article>
+
+      <article class="project-card">
+        <header>
+          <h3>Greengrass</h3>
+          <span class="badge">Full-Stack</span>
+        </header>
+        <p>A platform connecting students with eco-friendly events and green community activities at Vietnam National University.</p>
+        <p><strong>Prize-winning project at WebDev Adventure 2026 (Encouragement Prize)</strong></p>
+        <footer>
+          <a href="#" aria-label="Source code for Greengrass">Source code</a>
+        </footer>
+      </article>
+
+      <article class="project-card">
+        <header>
+          <h3>Recipe Data Scraper</h3>
+          <span class="badge">Python</span>
+        </header>
+        <p>A Python script that collects recipe data from monngonmoingay.com: dish name, image, servings, cooking time, difficulty, ingredients (name, quantity, unit), preparation and cooking steps, usage notes, tips, and category tags.</p>
+        <footer>
+          <a href="#" aria-label="Source code for Recipe Data Scraper">Source code</a>
+        </footer>
+      </article>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>Have a project, an internship or a question? Write to me at <a href="mailto:vanthien1462006@gmail.com">vanthien1462006@gmail.com</a> or use the form below.</p>
+
+      <form id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required minlength="2" autocomplete="name" aria-describedby="name-hint name-error">
+        <p class="field-hint" id="name-hint">At least 2 characters.</p>
+        <p class="field-error" id="name-error"></p>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" aria-describedby="email-hint email-error">
+        <p class="field-hint" id="email-hint">Use the format name@example.com.</p>
+        <p class="field-error" id="email-error"></p>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500" aria-describedby="message-hint message-error"></textarea>
+        <p class="field-hint" id="message-hint">Between 10 and 500 characters.</p>
+        <p class="field-error" id="message-error"></p>
+
+        <button type="submit">Send message</button>
+        <p id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <address>
+      <a href="mailto:vanthien1462006@gmail.com">vanthien1462006@gmail.com</a>
+    </address>
+    <p>&copy; 2026 Vo Van Thien</p>
+  </footer>
+</body>
+</html>
