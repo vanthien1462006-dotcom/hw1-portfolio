@@ -48,6 +48,12 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
+/* Programmatic focus targets (main after the skip-link, the form status): same ring, drawn inside the box */
+[tabindex="-1"]:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: -3px;
+}
+
 /* Skip link */
 .skip-link {
   padding: var(--space-3) var(--space-4);
