@@ -1,7 +1,7 @@
 /* Layout only: positioning, grids and spacing. Colors come from tokens.css. */
 
 :root {
-  --header-offset: 9rem;
+  --header-offset: 11.5rem;
   --content-max: 70rem;
   --card-min: 17.5rem;
 }
@@ -156,7 +156,7 @@ body > footer {
 
 @media (min-width: 48rem) {
   :root {
-    --header-offset: 6rem;
+    --header-offset: 8.5rem;
   }
 
   body > header > p,

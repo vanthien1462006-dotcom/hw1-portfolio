@@ -74,6 +74,11 @@ nav a {
   white-space: nowrap;
 }
 
+/* The nav scrolls and clips outlines, so its focus ring is drawn inside the link */
+nav a:focus-visible {
+  outline-offset: -3px;
+}
+
 /* Theme toggle: moon while light is active, sun while dark is active */
 #theme-btn {
   display: inline-grid;
