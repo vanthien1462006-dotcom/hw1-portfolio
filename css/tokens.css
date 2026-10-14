@@ -1,1 +1,97 @@
-/* stub: filled in T-03 */
+/* Design tokens. All colors in the project are declared in this file only. */
+
+:root {
+  color-scheme: light;
+
+  /* Light theme: "blueprint paper" */
+  --bg: #f4f7fc;
+  --bg-elevated: #ffffff;
+  --surface: #e8eef8;
+  --text: #0b1b3a;
+  --text-muted: #44546f;
+  --border: #7a8aa6;
+  --accent: #3730a3;
+  --accent-2: #6d28d9;
+  --on-accent: #ffffff;
+  --focus-ring: #3730a3;
+  --danger: #b91c1c;
+  --success: #166534;
+  --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 22%, transparent);
+  --grid-line: color-mix(in srgb, var(--accent) 10%, transparent);
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5625rem;
+  --step-3: 1.9375rem;
+  --step-4: 2.4375rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--text) 16%, transparent);
+  --shadow-md: 0 4px 12px color-mix(in srgb, var(--text) 18%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, var(--text) 22%, transparent);
+
+  /* Motion */
+  --transition-fast: 150ms ease-out;
+}
+
+/* Dark theme: "cyber blueprint", applied by system preference unless light is chosen */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #060d1f;
+    --bg-elevated: #0d1730;
+    --surface: #131f3d;
+    --text: #e6edf8;
+    --text-muted: #9db0cf;
+    --border: #5a6f94;
+    --accent: #22d3ee;
+    --accent-2: #a78bfa;
+    --on-accent: #04101f;
+    --focus-ring: #22d3ee;
+    --danger: #ff8a8a;
+    --success: #4ade80;
+    --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 45%, transparent);
+    --grid-line: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+}
+
+/* Dark theme: applied when the user picks it explicitly */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #060d1f;
+  --bg-elevated: #0d1730;
+  --surface: #131f3d;
+  --text: #e6edf8;
+  --text-muted: #9db0cf;
+  --border: #5a6f94;
+  --accent: #22d3ee;
+  --accent-2: #a78bfa;
+  --on-accent: #04101f;
+  --focus-ring: #22d3ee;
+  --danger: #ff8a8a;
+  --success: #4ade80;
+  --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 45%, transparent);
+  --grid-line: color-mix(in srgb, var(--accent) 12%, transparent);
+}
