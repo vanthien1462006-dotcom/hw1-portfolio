@@ -1,0 +1,1652 @@
+
+> /clear
+
+> <ide_opened_file>The user opened the file
+  c:\Users\USER\Documents\HomeWork_WEBDEV\hw1-portfolio\CLAUDE.md in the IDE.
+  This may or may not be related to the current task.</ide_opened_file>
+
+> Hãy đọc project-rules.md. Đây là HW1: Production Portfolio (repo
+  hw1-portfolio). Nhiệm vụ DUY NHẤT lúc này là viết tài liệu
+  TASK_DECOMPOSITION.md bằng tiếng Anh, chưa viết bất kỳ code HTML/CSS/JS nào.
+
+  Phạm vi file: chỉ tạo TASK_DECOMPOSITION.md.
+
+  Nội dung bắt buộc của TASK_DECOMPOSITION.md (viết bằng tiếng Anh tự nhiên, rõ
+  ràng):
+  1. Overview: portfolio của Vo Van Thien, vanilla HTML/CSS/JS, mobile-first
+  375px, thiết kế "cyber blueprint" (nền navy tối, lưới mờ, accent cyan/violet,
+  font monospace hệ thống, có theme sáng/tối).
+  2. Work Breakdown Structure (bảng): ID, task, file chịu trách nhiệm,
+  acceptance criteria, commit message. Gồm đúng các task sau theo thứ tự:
+     - T-01 spec (TASK_DECOMPOSITION.md) - "docs(spec): define component
+  contracts & WBS table"
+     - T-02 semantic HTML landmark tree, 0 thẻ div, skip-link, 1 h1 -
+  "feat(html): semantic landmark tree"
+     - T-03 design tokens và reset (css/reset.css, css/tokens.css) -
+  "feat(css): design tokens & box-sizing reset"
+     - T-04 responsive grid layout (css/layout.css) - "feat(css): responsive
+  grid layout"
+     - T-05 components và states (css/components.css) - "feat(css): components
+  & states"
+     - T-06 theme engine (js/theme.js) - "feat(js): dark mode engine"
+     - T-07 contact form validation (js/contact-form.js) - "feat(js): contact
+  form validation"
+     - M1 WCAG 2.2 AA audit - "fix(a11y): contrast & landmarks"
+     - M2 focus trap / keyboard audit - "fix(nav): keyboard trap prevention"
+     - M3 strict CSP và zero inline handlers - "fix(security): strict CSP &
+  zero inline handlers"
+     - M4 Lighthouse 100 - "perf: optimize assets"
+  3. Landmark contract (cây DOM): a.skip-link -> #main-content; header (h1 là
+  tên "Vo Van Thien", tagline, nav aria-label="Primary" với 4 link #about
+  #skills #projects #contact, nút #theme-btn); main#main-content
+  (tabindex="-1") gồm section#hero (h2 + figure ảnh avatar 400x400),
+  section#about (h2 + dl thông tin), section#skills (h2 + các nhóm h3 + ul
+  badge), section#projects (h2 + 3 article.project-card), section#contact (h2 +
+  form#contact-form); footer (address + copyright). Không dùng div. Mỗi
+  section có aria-labelledby trỏ tới heading của nó.
+  4. Form contract: ba trường name, email, message; mỗi trường có label for=,
+  input/textarea id, p.field-hint#x-hint, p.field-error#x-error,
+  aria-describedby="x-hint x-error"; p#form-status role="status".
+  5. Theme contract: key localStorage là "theme" với giá trị "light" hoặc
+  "dark"; thuộc tính data-theme trên <html>; nút #theme-btn có
+  aria-pressed="true" khi đang ở dark.
+  6. CSS contract: mọi màu nằm trong :root (tokens.css), không có mã hex cứng
+  trong rule; ngân sách hiệu năng: CLS = 0, LCP < 2.0s trên Fast 3G; contrast
+  >= 4.5:1.
+  7. Verification gate cho từng task (ngắn gọn, 1-2 dòng mỗi task).
+  8. Rules: không one-shot prompt, mỗi task một commit nguyên tử.
+
+  Sau khi viết xong, chạy:
+  git add .gitignore CLAUDE.md project-rules.md TASK_DECOMPOSITION.md
+  git commit -m "docs(spec): define component contracts & WBS table"
+
+  Không push. Báo cáo bằng tiếng Việt: các file đã commit và mã hash.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(hw1-portfolio\TASK_DECOMPOSITION.md)
+  ⎿  Wrote 132 lines to hw1-portfolio\TASK_DECOMPOSITION.md
+       1 # TASK_DECOMPOSITION.md — HW1: Production Portfolio
+       3 This document is the specification for the portfolio. It defines
+         n gates. No HTML, CSS or JS is written until the matching task s
+          in case of conflict.
+       5 ## 1. Overview
+       6
+         ML, CSS and JavaScript only. No frameworks, no build tools, no C
+       8
+         ayouts are added with `min-width` media queries.
+         d with a faint grid, cyan and v
+     … +206 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Mình đã viết xong TASK_DECOMPOSITION.md và commit, chưa push.
+
+  - Mã hash: 0f108e2
+  - Commit message: docs(spec): define component contracts & WBS table
+  - Các file đã commit: .gitignore, CLAUDE.md, project-rules.md,
+    TASK_DECOMPOSITION.md. Tổng cộng 210 dòng thêm mới.
+
+  TASK_DECOMPOSITION.md có đủ 8 mục bạn yêu cầu, viết bằng tiếng Anh. Bảng WBS
+  gồm đúng 11 task theo thứ tự T-01 đến T-07 rồi M1 đến M4, mỗi task có commit
+  message như bạn đưa. Mình chưa viết HTML, CSS hay JS nào, và đây là lần kiểm
+  tra bằng mắt, chưa chạy công cụ nào.
+
+  Mình tự thêm vài chi tiết vào hợp đồng, bạn xem có muốn giữ không:
+  - Cây DOM có figcaption trong figure avatar, và tiêu đề h3 cho tên các project
+    card.
+  - Hợp đồng theme có mặc định theo prefers-color-scheme khi chưa lưu giá trị.
+    Giá trị lạ trong localStorage bị bỏ qua.
+  - Hợp đồng form có aria-invalid, và kiểm tra khi submit và khi blur.
+  - Theme sáng đặt ở [data-theme="light"] trong tokens.css.
+
+  Git báo cảnh báo LF sẽ đổi thành CRLF trên Windows. Cảnh báo này không ảnh
+  hưởng gì, nhưng nếu muốn thì sau này đặt .gitattributes hoặc core.autocrlf.
+
+> <ide_opened_file>The user opened the file
+  c:\Users\USER\Documents\HomeWork_WEBDEV\hw1-portfolio\TASK_DECOMPOSITION.md
+  in the IDE. This may or may not be related to the current
+  task.</ide_opened_file>
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-02 và Landmark
+  contract). Chỉ làm task T-02: HTML ngữ nghĩa. Tuyệt đối không viết CSS hay JS
+  thật trong task này.
+
+  Phạm vi file được tạo:
+  - index.html
+  - assets/avatar.svg (ảnh minh họa dạng SVG: avatar hình học trừu tượng, tông
+  navy/cyan/violet, viewBox vuông, không chứa chữ, không font ngoài)
+  - assets/favicon.svg (biểu tượng đơn giản chữ "V" hoặc ký hiệu code)
+  - 6 file stub, mỗi file chỉ có đúng 1 dòng comment ghi "stub: filled in
+  T-0x": css/reset.css (T-03), css/tokens.css (T-03), css/layout.css (T-04),
+  css/components.css (T-05), js/theme.js (T-06), js/contact-form.js (T-07). Mục
+  đích: HTML tham chiếu sẵn mọi file để không bị lỗi 404, các commit sau chỉ
+  cần sửa 1 loại file.
+
+  Yêu cầu index.html (tiếng Anh):
+  - <!DOCTYPE html>, <html lang="en">, meta charset UTF-8, meta viewport,
+  <title>Vo Van Thien | Full-Stack Developer Portfolio</title>, meta
+  description, meta color-scheme "dark light", link favicon.
+  - Thứ tự link CSS: reset, tokens, layout, components. Script: <script
+  src="js/theme.js"></script> trong <head> (không defer), và <script
+  type="module" src="js/contact-form.js"></script>.
+  - Đúng cây landmark trong contract. KHÔNG có thẻ <div> nào. Đúng 1 thẻ h1,
+  không nhảy cấp heading. Không dùng role thừa vì thẻ native đã có landmark
+  role; chỉ dùng aria-label cho nav.
+  - Nội dung thật:
+    * Hero: h2 "Full-Stack Developer in the making", đoạn giới thiệu 1-2 câu,
+  hai link: "View projects" (#projects) và "Contact me" (#contact); figure chứa
+  <img src="assets/avatar.svg" alt="Illustrated avatar of Vo Van Thien"
+  width="400" height="400"> (không dùng loading=lazy cho ảnh hero) và
+  figcaption.
+    * About: dl gồm Student code 24521671, Faculty "Information Systems",
+  University "University of Information Technology (UIT), VNU-HCM", Focus
+  "Full-Stack Development".
+    * Skills: nhóm "Frontend" (HTML5, CSS3, JavaScript ES6+), nhóm "Backend &
+  Data" (Python, Web scraping), nhóm "Tools" (Git and GitHub). Mỗi nhóm là h3 +
+  ul. Chỉ dùng đúng các kỹ năng này, không tự thêm công nghệ.
+    * Projects: 3 article.project-card (header h3 + span.badge, p mô tả, footer
+  có link "Source code" với aria-label rõ ràng, href="#" làm placeholder):
+      - Chuck King: web-based 2D vertical rage platformer inspired by Jump
+  King. Hold a key to charge the jump, release to jump. If you fall, you lose
+  all your progress. Badge: "Game".
+      - Greengrass: platform connecting students with eco-friendly events and
+  green community activities at Vietnam National University. Có
+  <strong>Prize-winning project at WebDev Adventure 2026 (Encouragement
+  Prize)</strong>. Badge: "Full-Stack".
+      - Recipe Data Scraper: Python script that collects recipe data from
+  monngonmoingay.com: dish name, image, servings, cooking time, difficulty,
+  ingredients (name, quantity, unit), preparation and cooking steps, usage
+  notes, tips, and category tags. Badge: "Python".
+    * Contact: đoạn mô tả + link mailto:vanthien1462006@gmail.com +
+  form#contact-form (novalidate KHÔNG dùng; dùng validation native) theo Form
+  contract: name (required, minlength 2), email (type=email, required), message
+  (textarea, required, minlength 10, maxlength 500), nút submit "Send
+  message". Mỗi trường có label, hint, error và aria-describedby đúng contract.
+  p#form-status role="status".
+    * Header có nút <button type="button" id="theme-btn" aria-pressed="false">
+  chứa 2 svg aria-hidden="true" (icon mặt trăng, icon mặt trời) và chữ "Theme"
+  ẩn đối với mắt nhưng không dùng thuộc tính style; dùng
+  class="visually-hidden" cho chữ (CSS sẽ viết sau).
+    * Footer: <address> với email, và dòng "&copy; 2026 Vo Van Thien".
+  - Không có inline style, không có inline script, không có onclick.
+
+  Tự kiểm tra bằng lệnh trước khi commit (PowerShell):
+  - Select-String -Path index.html -Pattern '<div'   (kết quả phải rỗng)
+  - Select-String -Path index.html -Pattern '<h1' (đúng 1 kết quả)
+  Báo kết quả bằng tiếng Việt.
+
+  Sau đó commit chỉ các file đã tạo (liệt kê đường dẫn tường minh, không dùng
+  git add .):
+  git commit -m "feat(html): semantic landmark tree"
+
+  Không push.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Write(hw1-portfolio\assets\avatar.svg)
+  ⎿  Wrote 20 lines to hw1-portfolio\assets\avatar.svg
+       1 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" wi
+         dth="400" height="400">
+       2   <defs>
+       3     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+       4       <stop offset="0" stop-color="#0b1426"/>
+       6     </linearGradient>
+       7     <linearGradient id="face" x1="0" y1="0" x2="1" y2="1">
+       8       <stop offset="0" stop-color="#22d3ee"/>
+       9       <stop offset="1" stop-color="#8b5cf6"/>
+      10     </linearGradient>
+     … +18 lines (ctrl+o to expand)
+
+● Write(hw1-portfolio\assets\favicon.svg)
+  ⎿  Wrote 5 lines to hw1-portfolio\assets\favicon.svg
+      1 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width
+        ="64" height="64">
+      2   <rect width="64" height="64" rx="12" fill="#0b1426"/>
+      3   <path d="M16 18L32 48L48 18" fill="none" stroke="#22d3ee" strok
+        e-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      4   <circle cx="50" cy="14" r="4" fill="#8b5cf6"/>
+      5 </svg>
+
+● Write(hw1-portfolio\index.html)
+  ⎿  Wrote 156 lines to hw1-portfolio\index.html
+       1 <!DOCTYPE html>
+       3 <head>
+       4   <meta charset="UTF-8">
+       5   <meta name="viewport" content="width=device-width, initial-sca
+       6   <title>Vo Van Thien | Full-Stack Developer Portfolio</title>
+       7   <meta name="description" content="Portfolio of Vo Van Thien, a
+         tack web development.">
+       8   <meta name="color-scheme" content="dark light">
+       9   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml
+      10   <link rel="stylesheet" href="css/reset.css">
+     … +180 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● T-02 đã xong và commit, chưa push.
+
+  - Mã hash: b6994e9
+  - Commit message: feat(html): semantic landmark tree
+  - File đã commit (9 file): index.html, assets/avatar.svg, assets/favicon.svg,
+    4 stub CSS (reset, tokens, layout, components) và 2 stub JS (theme,
+    contact-form).
+
+  Kết quả tự kiểm tra bằng PowerShell:
+  - Select-String tìm <div: 0 kết quả, đúng yêu cầu.
+  - Select-String tìm <h1: đúng 1 kết quả.
+  - Tìm style=, onclick=, <style và <script> trần: 0 kết quả.
+
+  Mình chưa chạy HTML validator và chưa mở trang trên Live Server. Phần kiểm tra
+  Tab vào skip-link đầu tiên là của gate T-02 nên vẫn cần bạn xem tay.
+
+  Ba chỗ mình tự quyết định, bạn xem có ổn không:
+  1. Form không có thẻ bọc từng trường. <p> không được chứa <p>.field-hint, và
+     bạn cấm <div>. Vì vậy label, control, hint, error nằm thẳng trong form.
+     Task CSS sau sẽ dùng grid hoặc flex với gap để tách các nhóm.
+  2. Thêm figure > figcaption với nội dung "Abstract avatar in navy, cyan and
+     violet." Bạn có thể đổi lại nếu muốn câu khác.
+  3. Mã màu hex trong hai file SVG. Quy tắc "không hex" chỉ áp dụng cho rule CSS
+     ngoài tokens.css, nên SVG vẫn hợp lệ. Nhưng avatar sẽ không đổi màu theo
+     theme.
+
+  Tagline trong header là "Information Systems student building for the web", do
+  bạn chưa chỉ định nội dung nên mình tự viết.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-03). Chỉ làm task T-03:
+  design tokens và reset. Không sửa index.html, không viết layout hay
+  component, không viết JS.
+
+  Phạm vi file được sửa: css/reset.css và css/tokens.css (hiện đang là stub,
+  hãy ghi đè nội dung stub).
+
+  css/reset.css:
+  - *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  - html: color-scheme light dark; -webkit-text-size-adjust 100%;
+  scroll-behavior smooth (chỉ khi người dùng không bật prefers-reduced-motion)
+  - body: font-family theo biến token, line-height 1.6, min-height 100vh
+  - img, svg: display block; max-inline-size 100%; height auto khi hợp lý
+  - button, input, textarea: font inherit
+  - ul[role], ul: list-style none KHÔNG áp dụng toàn cục (chỉ reset
+  margin/padding)
+  - class .visually-hidden (ẩn bằng kỹ thuật clip, vẫn đọc được bằng screen
+  reader)
+  - @media (prefers-reduced-motion: reduce) tắt animation/transition.
+
+  css/tokens.css (toàn bộ màu chỉ được khai báo ở file này):
+  - :root chứa token của theme SÁNG ("blueprint paper", chữ navy đậm, accent
+  indigo đậm), kèm token không phải màu: --font-sans (system-ui stack),
+  --font-mono (ui-monospace, "Cascadia Code", Consolas, monospace), thang cỡ
+  chữ --step--1 ... --step-4, --space-1 ... --space-8, --radius-sm/md/lg,
+  --shadow-*, --transition-fast.
+  - Theme TỐI ("cyber blueprint": nền navy rất tối, accent cyan + violet phát
+  sáng) được áp dụng khi: (a) @media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { ... } } và (b) :root[data-theme="dark"] {
+  ... }. Hai khối dark phải có cùng giá trị.
+  - Token màu tối thiểu: --bg, --bg-elevated, --surface, --text, --text-muted,
+  --border, --accent, --accent-2, --on-accent, --focus-ring, --glow (dùng
+  color-mix cho bóng phát sáng), --grid-line, --danger, --success.
+  - Mỗi theme đặt color-scheme tương ứng.
+  - Yêu cầu tương phản: --text và --text-muted trên --bg, --bg-elevated,
+  --surface đạt >= 4.5:1; --accent trên --bg >= 4.5:1; --on-accent trên
+  --accent >= 4.5:1; --border và --focus-ring trên --bg >= 3:1; --danger và
+  --success trên --surface >= 4.5:1. Tính tỉ lệ tương phản thực tế bằng một
+  lệnh Python/Node chạy một lần trong terminal (KHÔNG lưu thành file trong
+  repo) và báo bảng kết quả bằng tiếng Việt.
+  - Không dùng font hay ảnh từ bên ngoài.
+
+  Tự kiểm tra: Select-String -Path css\reset.css -Pattern '#[0-9a-fA-F]{3,8}'
+  phải rỗng.
+
+  Commit chỉ 2 file:
+  git add css/reset.css css/tokens.css
+  git commit -m "feat(css): design tokens & box-sizing reset"
+
+  Không push.
+
+● Write(hw1-portfolio\css\tokens.css)
+  ⎿  Added 97 lines, removed 1 line
+       1 -/* stub: filled in T-03 */                                     
+       1 +/* Design tokens. All colors in the project are declared in thi
+         +s file only. */                                                
+       2 +                                                               
+       3 +:root {                                                        
+       4 +  color-scheme: light;                                         
+       5 +                                                               
+       6 +  /* Light theme: "blueprint paper" */                         
+       7 +  --bg: #f4f7fc;                                               
+       8 +  --bg-elevated: #ffffff;                                      
+       9 +  --surface: #e8eef8;                                          
+      10 +  --text: #0b1b3a;                                             
+      11 +  --text-muted: #44546f;                                       
+      12 +  --border: #7a8aa6;                                           
+      13 +  --accent: #3730a3;                                           
+      14 +  --accent-2: #6d28d9;                                         
+      15 +  --on-accent: #ffffff;                                        
+      16 +  --focus-ring: #3730a3;                                       
+      17 +  --danger: #b91c1c;                                           
+      18 +  --success: #166534;                                          
+      19 +  --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 22%, tran
+         +sparent);                                                      
+      20 +  --grid-line: color-mix(in srgb, var(--accent) 10%, transparen
+         +t);                                                            
+      21 +                                                               
+      22 +  /* Typography */                                             
+      23 +  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "H
+         +elvetica Neue", Arial, sans-serif;                             
+      24 +  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospa
+         +ce;                                                            
+      25 +                                                               
+      26 +  --step--1: 0.8125rem;                                        
+      27 +  --step-0: 1rem;                                              
+      28 +  --step-1: 1.25rem;                                           
+      29 +  --step-2: 1.5625rem;                                         
+      30 +  --step-3: 1.9375rem;                                         
+      31 +  --step-4: 2.4375rem;                                         
+      32 +                                                               
+      33 +  /* Spacing */                                                
+      34 +  --space-1: 0.25rem;                                          
+      35 +  --space-2: 0.5rem;                                           
+      36 +  --space-3: 0.75rem;                                          
+      37 +  --space-4: 1rem;                                             
+      38 +  --space-5: 1.5rem;                                           
+      39 +  --space-6: 2rem;                                             
+      40 +  --space-7: 3rem;                                             
+      41 +  --space-8: 4.5rem;                                           
+      42 +                                                               
+      43 +  /* Radius */                                                 
+      44 +  --radius-sm: 0.25rem;                                        
+      45 +  --radius-md: 0.5rem;                                         
+      46 +  --radius-lg: 1rem;                                           
+      47 +                                                               
+      48 +  /* Shadows */                                                
+      49 +  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--text) 16%, tr
+         +ansparent);                                                    
+      50 +  --shadow-md: 0 4px 12px color-mix(in srgb, var(--text) 18%, t
+         +ransparent);                                                   
+      51 +  --shadow-lg: 0 12px 32px color-mix(in srgb, var(--text) 22%, 
+         +transparent);                                                  
+      52 +                                                               
+      53 +  /* Motion */                                                 
+      54 +  --transition-fast: 150ms ease-out;                           
+      55 +}                                                              
+      56 +                                                               
+      57 +/* Dark theme: "cyber blueprint", applied by system preference 
+         +unless light is chosen */                                      
+      58 +@media (prefers-color-scheme: dark) {                          
+      59 +  :root:not([data-theme="light"]) {                            
+      60 +    color-scheme: dark;                                        
+      61 +                                                               
+      62 +    --bg: #060d1f;                                             
+      63 +    --bg-elevated: #0d1730;                                    
+      64 +    --surface: #131f3d;                                        
+      65 +    --text: #e6edf8;                                           
+      66 +    --text-muted: #9db0cf;                                     
+      67 +    --border: #5a6f94;                                         
+      68 +    --accent: #22d3ee;                                         
+      69 +    --accent-2: #a78bfa;                                       
+      70 +    --on-accent: #04101f;                                      
+      71 +    --focus-ring: #22d3ee;                                     
+      72 +    --danger: #ff8a8a;                                         
+      73 +    --success: #4ade80;                                        
+      74 +    --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 45%, tr
+         +ansparent);                                                    
+      75 +    --grid-line: color-mix(in srgb, var(--accent) 12%, transpar
+         +ent);                                                          
+      76 +  }                                                            
+      77 +}                                                              
+      78 +                                                               
+      79 +/* Dark theme: applied when the user picks it explicitly */    
+      80 +:root[data-theme="dark"] {                                     
+      81 +  color-scheme: dark;                                          
+      82 +                                                               
+      83 +  --bg: #060d1f;                                               
+      84 +  --bg-elevated: #0d1730;                                      
+      85 +  --surface: #131f3d;                                          
+      86 +  --text: #e6edf8;                                             
+      87 +  --text-muted: #9db0cf;                                       
+      88 +  --border: #5a6f94;                                           
+      89 +  --accent: #22d3ee;                                           
+      90 +  --accent-2: #a78bfa;                                         
+      91 +  --on-accent: #04101f;                                        
+      92 +  --focus-ring: #22d3ee;                                       
+      93 +  --danger: #ff8a8a;                                           
+      94 +  --success: #4ade80;                                          
+      95 +  --glow: 0 0 1.5rem color-mix(in srgb, var(--accent) 45%, tran
+         +sparent);                                                      
+      96 +  --grid-line: color-mix(in srgb, var(--accent) 12%, transparen
+         +t);                                                            
+      97 +}                                                              
+
+● Write(hw1-portfolio\css\reset.css)
+  ⎿  Added 64 lines, removed 1 line
+       1 -/* stub: filled in T-03 */                                     
+       1 +*,                                                             
+       2 +*::before,                                                     
+       3 +*::after {                                                     
+       4 +  box-sizing: border-box;                                      
+       5 +  margin: 0;                                                   
+       6 +  padding: 0;                                                  
+       7 +}                                                              
+       8 +                                                               
+       9 +html {                                                         
+      10 +  color-scheme: light dark;                                    
+      11 +  -webkit-text-size-adjust: 100%;                              
+      12 +  text-size-adjust: 100%;                                      
+      13 +}                                                              
+      14 +                                                               
+      15 +@media (prefers-reduced-motion: no-preference) {               
+      16 +  html {                                                       
+      17 +    scroll-behavior: smooth;                                   
+      18 +  }                                                            
+      19 +}                                                              
+      20 +                                                               
+      21 +body {                                                         
+      22 +  min-height: 100vh;                                           
+      23 +  font-family: var(--font-sans);                               
+      24 +  line-height: 1.6;                                            
+      25 +}                                                              
+      26 +                                                               
+      27 +img,                                                           
+      28 +svg {                                                          
+      29 +  display: block;                                              
+      30 +  max-inline-size: 100%;                                       
+      31 +}                                                              
+      32 +                                                               
+      33 +img {                                                          
+      34 +  block-size: auto;                                            
+      35 +}                                                              
+      36 +                                                               
+      37 +button,                                                        
+      38 +input,                                                         
+      39 +textarea {                                                     
+      40 +  font: inherit;                                               
+      41 +}                                                              
+      42 +                                                               
+      43 +.visually-hidden {                                             
+      44 +  position: absolute;                                          
+      45 +  inline-size: 1px;                                            
+      46 +  block-size: 1px;                                             
+      47 +  margin: -1px;                                                
+      48 +  overflow: hidden;                                            
+      49 +  clip: rect(0 0 0 0);                                         
+      50 +  clip-path: inset(50%);                                       
+      51 +  white-space: nowrap;                                         
+      52 +  border: 0;                                                   
+      53 +}                                                              
+      54 +                                                               
+      55 +@media (prefers-reduced-motion: reduce) {                      
+      56 +  *,                                                           
+      57 +  *::before,                                                   
+      58 +  *::after {                                                   
+      59 +    animation-duration: 0.01ms !important;                     
+      60 +    animation-iteration-count: 1 !important;                   
+      61 +    transition-duration: 0.01ms !important;                    
+      62 +    scroll-behavior: auto !important;                          
+      63 +  }                                                            
+      64 +}                                                              
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All pass. Committing.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● T-03 đã xong và commit, chưa push.
+
+  - Mã hash: e07ea9e
+  - Commit message: feat(css): design tokens & box-sizing reset
+  - File đã commit: css/reset.css, css/tokens.css.
+
+  Kiểm tra mã hex: mình tìm mã hex trong reset.css bằng grep -E với cùng mẫu
+  regex, vì dùng bash chứ không dùng Select-String. Kết quả là 0 dòng.
+
+  Tỉ lệ tương phản: mình tính bằng một đoạn Python chạy một lần, không lưu thành
+  file. Tất cả đều đạt.
+
+  ┌──────────────────────────────┬─────────┬───────┬───────┐
+  │           Cặp màu            │ Yêu cầu │ Sáng  │  Tối  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text / --bg                │ ≥ 4.5   │ 15.87 │ 16.44 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text / --bg-elevated       │ ≥ 4.5   │ 17.04 │ 15.08 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text / --surface           │ ≥ 4.5   │ 14.62 │ 13.81 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text-muted / --bg          │ ≥ 4.5   │ 7.13  │ 8.80  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text-muted / --bg-elevated │ ≥ 4.5   │ 7.65  │ 8.07  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --text-muted / --surface     │ ≥ 4.5   │ 6.57  │ 7.39  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --accent / --bg              │ ≥ 4.5   │ 9.25  │ 10.71 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --on-accent / --accent       │ ≥ 4.5   │ 9.93  │ 10.57 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --border / --bg              │ ≥ 3     │ 3.25  │ 3.81  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --focus-ring / --bg          │ ≥ 3     │ 9.25  │ 10.71 │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --danger / --surface         │ ≥ 4.5   │ 5.55  │ 7.17  │
+  ├──────────────────────────────┼─────────┼───────┼───────┤
+  │ --success / --surface        │ ≥ 4.5   │ 6.12  │ 9.33  │
+  └──────────────────────────────┴─────────┴───────┴───────┘
+
+  Điểm cần lưu ý:
+  - Hai khối dark: khối @media (prefers-color-scheme: dark) và khối
+    :root[data-theme="dark"] có giá trị giống hệt nhau, mình chép tay nên chưa
+    kiểm tra bằng máy. Khi sửa màu tối sau này phải sửa cả hai chỗ.
+  - --accent-2, --glow, --grid-line: không có yêu cầu tương phản trong bảng.
+    --accent-2 chỉ dùng làm điểm nhấn trang trí. Nếu dùng làm chữ hoặc viền, cần
+    kiểm tra lại ở task M1.
+  - --border sáng: khá sát ngưỡng 3 (3.25), nên đừng làm nó nhạt hơn.
+  - Ngoài danh sách bạn nêu: mình thêm text-size-adjust không tiền tố và
+    block-size: auto riêng cho img. Quy tắc giảm chuyển động trong reset còn đặt
+    scroll-behavior: auto.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-04). Chỉ làm task T-04:
+  layout. Không sửa HTML, không viết style cho component (màu nút, thẻ,
+  form...) và không viết JS.
+
+  Phạm vi file được sửa: css/layout.css (hiện là stub, ghi đè). Chỉ dùng token
+  trong tokens.css qua var(--...), không viết mã màu cứng.
+
+  Yêu cầu (mobile-first, thiết kế cho 375px trước, chỉ dùng media query
+  min-width khi cần):
+  - body: nền dùng token --bg kèm lưới "blueprint" mờ tạo bằng linear-gradient
+  với token --grid-line (background-size cố định, không ảnh ngoài);
+  background-attachment không fixed để tránh giật.
+  - a.skip-link: ẩn ngoài màn hình, hiện ra khi :focus (position absolute, góc
+  trên trái).
+  - header: display flex, wrap, justify-content space-between, align-items
+  center, gap, position sticky top 0, nền --bg-elevated, border-bottom. Dùng
+  gap thay cho margin. Ở 375px nav phải cuộn được hoặc xuống dòng, KHÔNG gây
+  cuộn ngang trang.
+  - nav ul: flex, gap, list-style none.
+  - html: scroll-padding-top đủ lớn để header sticky không che tiêu đề khi nhảy
+  tới #about, #skills...
+  - main > section: padding-inline theo token, max-inline-size khoảng 70rem,
+  margin-inline auto, khoảng cách dọc theo token.
+  - #hero: 1 cột trên mobile, 2 cột (văn bản + ảnh) từ min-width 48rem bằng CSS
+  Grid.
+  - Skills: container nhóm kỹ năng dùng Grid repeat(auto-fit, minmax(min(100%,
+  17.5rem), 1fr)); danh sách badge dùng flex-wrap + gap.
+  - Projects: Grid repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr)) với gap.
+  - #about dl: grid hai cột (term, description) từ 40rem.
+  - Contact: form là grid 1 cột, khoảng cách theo token; từ 48rem có thể chia 2
+  cột (name + email cùng hàng).
+  - footer: flex, space-between, wrap.
+  - Mọi ảnh trong layout có aspect-ratio hoặc kích thước từ thuộc tính
+  width/height để không gây CLS.
+
+  Tự kiểm tra: không có mã hex/rgb cứng trong css/layout.css (Select-String
+  -Path css\layout.css -Pattern '#[0-9a-fA-F]{3,8}' phải rỗng).
+
+  Commit:
+  git add css/layout.css
+  git commit -m "feat(css): responsive grid layout"
+
+  Không push.
+
+● Write(hw1-portfolio\css\layout.css)
+  ⎿  Added 249 lines, removed 1 line
+        1 -/* stub: filled in T-04 */                                    
+        1 +/* Layout only: positioning, grids and spacing. Colors come fr
+          +om tokens.css. */                                             
+        2 +                                                              
+        3 +:root {                                                       
+        4 +  --header-offset: 9rem;                                      
+        5 +  --content-max: 70rem;                                       
+        6 +  --card-min: 17.5rem;                                        
+        7 +}                                                             
+        8 +                                                              
+        9 +html {                                                        
+       10 +  scroll-padding-top: var(--header-offset);                   
+       11 +}                                                             
+       12 +                                                              
+       13 +body {                                                        
+       14 +  background-color: var(--bg);                                
+       15 +  background-image:                                           
+       16 +    linear-gradient(var(--grid-line) 1px, transparent 1px),   
+       17 +    linear-gradient(90deg, var(--grid-line) 1px, transparent 1
+          +px);                                                          
+       18 +  background-size: 2rem 2rem;                                 
+       19 +  background-attachment: scroll;                              
+       20 +  color: var(--text);                                         
+       21 +}                                                             
+       22 +                                                              
+       23 +/* Skip link: off-screen until focused */                     
+       24 +.skip-link {                                                  
+       25 +  position: absolute;                                         
+       26 +  inset-block-start: 0;                                       
+       27 +  inset-inline-start: 0;                                      
+       28 +  z-index: 20;                                                
+       29 +  transform: translateY(-120%);                               
+       30 +}                                                             
+       31 +                                                              
+       32 +.skip-link:focus {                                            
+       33 +  transform: translateY(0);                                   
+       34 +}                                                             
+       35 +                                                              
+       36 +/* Header */                                                  
+       37 +header:not(.project-card > header) {                          
+       38 +  position: sticky;                                           
+       39 +  inset-block-start: 0;                                       
+       40 +  z-index: 10;                                                
+       41 +  display: flex;                                              
+       42 +  flex-wrap: wrap;                                            
+       43 +  justify-content: space-between;                             
+       44 +  align-items: center;                                        
+       45 +  gap: var(--space-2) var(--space-4);                         
+       46 +  padding: var(--space-3) var(--space-4);                     
+       47 +  background-color: var(--bg-elevated);                       
+       48 +  border-block-end: 1px solid var(--border);                  
+       49 +}                                                             
+       50 +                                                              
+       51 +header:not(.project-card > header) > p {                      
+       52 +  flex: 1 1 100%;                                             
+       53 +}                                                             
+       54 +                                                              
+       55 +header:not(.project-card > header) > nav {                    
+       56 +  flex: 1 1 0;                                                
+       57 +  min-inline-size: 0;                                         
+       58 +  overflow-x: auto;                                           
+       59 +}                                                             
+       60 +                                                              
+       61 +nav ul {                                                      
+       62 +  display: flex;                                              
+       63 +  gap: var(--space-4);                                        
+       64 +  list-style: none;                                           
+       65 +}                                                             
+       66 +                                                              
+       67 +/* Page sections */                                           
+       68 +main > section {                                              
+       69 +  display: grid;                                              
+       70 +  gap: var(--space-4);                                        
+       71 +  max-inline-size: var(--content-max);                        
+       72 +  margin-inline: auto;                                        
+       73 +  padding-inline: var(--space-4);                             
+       74 +  padding-block: var(--space-7);                              
+       75 +}                                                             
+       76 +                                                              
+       77 +/* Hero */                                                    
+       78 +#hero > p:has(> a) {                                          
+       79 +  display: flex;                                              
+       80 +  flex-wrap: wrap;                                            
+       81 +  gap: var(--space-3);                                        
+       82 +}                                                             
+       83 +                                                              
+       84 +#hero img {                                                   
+       85 +  aspect-ratio: 1;                                            
+       86 +  inline-size: 100%;                                          
+       87 +  max-inline-size: 25rem;                                     
+       88 +}                                                             
+       89 +                                                              
+       90 +/* About */                                                   
+       91 +#about dl {                                                   
+       92 +  display: grid;                                              
+       93 +  gap: var(--space-1) var(--space-5);                         
+       94 +}                                                             
+       95 +                                                              
+       96 +/* Skills: each group is an h3 followed by a ul */            
+       97 +#skills ul {                                                  
+       98 +  display: flex;                                              
+       99 +  flex-wrap: wrap;                                            
+      100 +  gap: var(--space-2);                                        
+      101 +  list-style: none;                                           
+      102 +}                                                             
+      103 +                                                              
+      104 +/* Projects */                                                
+      105 +#projects {                                                   
+      106 +  grid-template-columns: repeat(auto-fit, minmax(min(100%, var
+          +(--card-min)), 1fr));                                         
+      107 +  gap: var(--space-5);                                        
+      108 +}                                                             
+      109 +                                                              
+      110 +#projects > h2 {                                              
+      111 +  grid-column: 1 / -1;                                        
+      112 +}                                                             
+      113 +                                                              
+      114 +.project-card {                                               
+      115 +  display: flex;                                              
+      116 +  flex-direction: column;                                     
+      117 +  gap: var(--space-3);                                        
+      118 +}                                                             
+      119 +                                                              
+      120 +.project-card > header {                                      
+      121 +  display: flex;                                              
+      122 +  flex-wrap: wrap;                                            
+      123 +  justify-content: space-between;                             
+      124 +  align-items: center;                                        
+      125 +  gap: var(--space-2);                                        
+      126 +}                                                             
+      127 +                                                              
+      128 +.project-card > footer {                                      
+      129 +  margin-block-start: auto;                                   
+      130 +}                                                             
+      131 +                                                              
+      132 +/* Contact form */                                            
+      133 +#contact-form {                                               
+      134 +  display: grid;                                              
+      135 +  gap: var(--space-2);                                        
+      136 +}                                                             
+      137 +                                                              
+      138 +.field-error {                                                
+      139 +  min-block-size: 1.6em;                                      
+      140 +}                                                             
+      141 +                                                              
+      142 +/* Footer */                                                  
+      143 +body > footer {                                               
+      144 +  display: flex;                                              
+      145 +  flex-wrap: wrap;                                            
+      146 +  justify-content: space-between;                             
+      147 +  gap: var(--space-3) var(--space-5);                         
+      148 +  padding: var(--space-5) var(--space-4);                     
+      149 +}                                                             
+      150 +                                                              
+      151 +@media (min-width: 40rem) {                                   
+      152 +  #about dl {                                                 
+      153 +    grid-template-columns: max-content 1fr;                   
+      154 +  }                                                           
+      155 +}                                                             
+      156 +                                                              
+      157 +@media (min-width: 48rem) {                                   
+      158 +  :root {                                                     
+      159 +    --header-offset: 6rem;                                    
+      160 +  }                                                           
+      161 +                                                              
+      162 +  header:not(.project-card > header) > p,                     
+      163 +  header:not(.project-card > header) > nav {                  
+      164 +    flex: 0 1 auto;                                           
+      165 +  }                                                           
+      166 +                                                              
+      167 +  main > section {                                            
+      168 +    padding-inline: var(--space-6);                           
+      169 +  }                                                           
+      170 +                                                              
+      171 +  /* Hero: text column and image column */                    
+      172 +  #hero {                                                     
+      173 +    grid-template-columns: minmax(0, 1fr) minmax(0, 25rem);   
+      174 +    align-content: center;                                    
+      175 +    column-gap: var(--space-6);                               
+      176 +  }                                                           
+      177 +                                                              
+      178 +  #hero > * {                                                 
+      179 +    grid-column: 1;                                           
+      180 +  }                                                           
+      181 +                                                              
+      182 +  #hero > figure {                                            
+      183 +    grid-column: 2;                                           
+      184 +    grid-row: 1 / span 3;                                     
+      185 +    align-self: center;                                       
+      186 +  }                                                           
+      187 +                                                              
+      188 +  /* Skills: one column per group, h2 spans the top row */    
+      189 +  #skills {                                                   
+      190 +    grid-auto-flow: column;                                   
+      191 +    grid-auto-columns: minmax(0, 1fr);                        
+      192 +    grid-template-rows: auto auto 1fr;                        
+      193 +    column-gap: var(--space-5);                               
+      194 +  }                                                           
+      195 +                                                              
+      196 +  #skills > h2 {                                              
+      197 +    grid-column: 1 / -1;                                      
+      198 +    grid-row: 1;                                              
+      199 +  }                                                           
+      200 +                                                              
+      201 +  /* Contact: name and email share a row */                   
+      202 +  #contact-form {                                             
+      203 +    grid-template-columns: repeat(2, minmax(0, 1fr));         
+      204 +    column-gap: var(--space-5);                               
+      205 +  }                                                           
+      206 +                                                              
+      207 +  #contact-form > label[for="name"],                          
+      208 +  #name,                                                      
+      209 +  #name-hint,                                                 
+      210 +  #name-error {                                               
+      211 +    grid-column: 1;                                           
+      212 +  }                                                           
+      213 +                                                              
+      214 +  #contact-form > label[for="email"],                         
+      215 +  #email,                                                     
+      216 +  #email-hint,                                                
+      217 +  #email-error {                                              
+      218 +    grid-column: 2;                                           
+      219 +  }                                                           
+      220 +                                                              
+      221 +  #contact-form > label[for="name"],                          
+      222 +  #contact-form > label[for="email"] {                        
+      223 +    grid-row: 1;                                              
+      224 +  }                                                           
+      225 +                                                              
+      226 +  #name,                                                      
+      227 +  #email {                                                    
+      228 +    grid-row: 2;                                              
+      229 +  }                                                           
+      230 +                                                              
+      231 +  #name-hint,                                                 
+      232 +  #email-hint {                                               
+      233 +    grid-row: 3;                                              
+      234 +  }                                                           
+      235 +                                                              
+      236 +  #name-error,                                                
+      237 +  #email-error {                                              
+      238 +    grid-row: 4;                                              
+      239 +  }                                                           
+      240 +                                                              
+      241 +  #contact-form > label[for="message"],                       
+      242 +  #message,                                                   
+      243 +  #message-hint,                                              
+      244 +  #message-error,                                             
+      245 +  #contact-form > button,                                     
+      246 +  #form-status {                                              
+      247 +    grid-column: 1 / -1;                                      
+      248 +  }                                                           
+      249 +}                                                             
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● T-04 đã xong và commit, chưa push.
+
+  - Mã hash: 15e8acb
+  - Commit message: feat(css): responsive grid layout
+  - File đã commit: css/layout.css. Tất cả khoảng cách, nền và màu đều dùng
+    var(--...).
+
+  Kiểm tra: Select-String tìm mã hex hoặc rgb( trong css\layout.css ra 0 kết
+  quả. Mình chưa mở trang trên Live Server nên chưa kiểm tra bằng mắt hay
+  DevTools. Cần xem tay hai điều sau ở 375px: không có cuộn ngang, và CLS bằng
+  0.
+
+  Cách mình xử lý vì không được sửa HTML:
+  - Skills: HTML không có thẻ bọc từng nhóm, chỉ có h3 rồi ul nằm thẳng trong
+    section. Vì vậy mình không dùng được repeat(auto-fit, ...) cho Skills. Từ
+    48rem, section dùng grid-auto-flow: column để mỗi cặp h3 + ul thành một cột.
+    Dưới 48rem thì xếp thành một cột.
+  - Projects: dùng đúng repeat(auto-fit, minmax(min(100%, var(--card-min)),
+    1fr)). h2 trải hết các cột. Với max-inline-size 70rem, lưới tối đa 3 cột,
+    vừa đủ cho 3 thẻ nên không có cột trống.
+  - Form: các trường nằm thẳng trong form, nên từ 48rem mình đặt grid-column và
+    grid-row tường minh theo id để name và email cùng một hàng. Nếu sau này thêm
+    hoặc đổi thứ tự trường trong form, phần này phải sửa theo.
+  - .field-error: có min-block-size: 1.6em để giữ chỗ, tránh CLS khi thông báo
+    lỗi hiện ra.
+
+  Giá trị mình tự ước lượng:
+  - scroll-padding-top: 9rem trên mobile và 6rem từ 48rem, qua biến
+    --header-offset. Chiều cao thật của header sticky chưa biết vì chưa có style
+    component. Nên đo lại ở task T-05 hoặc M1.
+  - Header trên mobile: nav có flex: 1 1 0 và overflow-x: auto, nên menu cuộn
+    ngang trong chính nó thay vì làm cả trang cuộn.
+
+  Selector header dùng body > header để không đụng vào header bên trong
+  .project-card.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-05). Chỉ làm task T-05:
+  style cho component. Không sửa HTML, không sửa layout.css, không viết JS.
+
+  Phạm vi file được sửa: css/components.css (hiện là stub, ghi đè). Chỉ dùng
+  token qua var(--...), không có mã màu cứng, kể cả trong box-shadow (dùng
+  token --glow hoặc color-mix với token).
+
+  Component cần style (tên selector bám theo class/id trong index.html):
+  - Typography: h1 dùng --font-mono; h2 có tiền tố trang trí "// " bằng
+  ::before (chỉ trang trí, không mang nội dung); link có gạch chân rõ ràng và
+  trạng thái :hover. KHÔNG dùng chữ gradient (background-clip: text) vì dễ
+  trượt contrast.
+  - Hero: dòng giới thiệu kiểu terminal (viền, nền --surface, con trỏ nhấp nháy
+  bằng CSS animation, tắt khi prefers-reduced-motion). Ảnh avatar có viền phát
+  sáng bằng --glow.
+  - Nút / link dạng nút: kích thước tối thiểu 44x44px, nền --accent, chữ
+  --on-accent, :hover, :active.
+  - #theme-btn: tròn, 44x44px; hiển thị icon mặt trăng khi aria-pressed="false"
+  và icon mặt trời khi aria-pressed="true" bằng selector thuộc tính
+  [aria-pressed]; .visually-hidden vẫn giữ chữ cho screen reader.
+  - .badge: pill nhỏ, viền --accent-2, chữ đạt contrast >= 4.5:1.
+  - .project-card: nền --surface, viền --border, bo góc, hover nâng nhẹ + glow
+  (transition ngắn, chỉ bật khi không có prefers-reduced-motion: reduce).
+  - Form: input/textarea đủ lớn (min-height 44px), viền --border,
+  :focus-visible dùng outline 3px --focus-ring có outline-offset;
+  [aria-invalid="true"] viền --danger; .field-hint màu --text-muted;
+  .field-error màu --danger; #form-status có biến thể thành công màu --success
+  (qua thuộc tính data-state="success" hoặc "error").
+  - :focus-visible toàn cục cho a, button, input, textarea, select với outline
+  đạt 3:1.
+  - footer: chữ --text-muted.
+
+  Tự kiểm tra: không có mã hex cứng; Select-String -Path css\components.css
+  -Pattern '#[0-9a-fA-F]{3,8}' phải rỗng.
+
+  Commit:
+  git add css/components.css
+  git commit -m "feat(css): components & states"
+
+  Không push.
+
+● Write(hw1-portfolio\css\components.css)
+  ⎿  Added 307 lines, removed 1 line
+        1 -/* stub: filled in T-05 */                                    
+        1 +/* Component styles. Colors come from tokens.css only. */     
+        2 +                                                              
+        3 +/* Typography */                                              
+        4 +h1,                                                           
+        5 +h2,                                                           
+        6 +h3 {                                                          
+        7 +  line-height: 1.2;                                           
+        8 +}                                                             
+        9 +                                                              
+       10 +h1 {                                                          
+       11 +  font-family: var(--font-mono);                              
+       12 +  font-size: var(--step-2);                                   
+       13 +}                                                             
+       14 +                                                              
+       15 +h2 {                                                          
+       16 +  font-family: var(--font-mono);                              
+       17 +  font-size: var(--step-3);                                   
+       18 +}                                                             
+       19 +                                                              
+       20 +h2::before {                                                  
+       21 +  content: "// ";                                             
+       22 +  content: "// " / "";                                        
+       23 +  color: var(--accent-2);                                     
+       24 +}                                                             
+       25 +                                                              
+       26 +h3 {                                                          
+       27 +  font-size: var(--step-1);                                   
+       28 +}                                                             
+       29 +                                                              
+       30 +a {                                                           
+       31 +  color: var(--accent);                                       
+       32 +  text-decoration: underline;                                 
+       33 +  text-decoration-thickness: 0.08em;                          
+       34 +  text-underline-offset: 0.2em;                               
+       35 +}                                                             
+       36 +                                                              
+       37 +a:hover {                                                     
+       38 +  text-decoration-thickness: 0.18em;                          
+       39 +}                                                             
+       40 +                                                              
+       41 +/* Global focus indicator */                                  
+       42 +a:focus-visible,                                              
+       43 +button:focus-visible,                                         
+       44 +input:focus-visible,                                          
+       45 +textarea:focus-visible,                                       
+       46 +select:focus-visible {                                        
+       47 +  outline: 3px solid var(--focus-ring);                       
+       48 +  outline-offset: 3px;                                        
+       49 +}                                                             
+       50 +                                                              
+       51 +/* Skip link */                                               
+       52 +.skip-link {                                                  
+       53 +  padding: var(--space-3) var(--space-4);                     
+       54 +  background-color: var(--accent);                            
+       55 +  color: var(--on-accent);                                    
+       56 +  font-weight: 700;                                           
+       57 +  text-decoration: none;                                      
+       58 +  border-end-end-radius: var(--radius-md);                    
+       59 +}                                                             
+       60 +                                                              
+       61 +/* Header and navigation */                                   
+       62 +header > p {                                                  
+       63 +  color: var(--text-muted);                                   
+       64 +  font-family: var(--font-mono);                              
+       65 +  font-size: var(--step--1);                                  
+       66 +}                                                             
+       67 +                                                              
+       68 +nav a {                                                       
+       69 +  display: inline-flex;                                       
+       70 +  align-items: center;                                        
+       71 +  min-block-size: 44px;                                       
+       72 +  padding-inline: var(--space-2);                             
+       73 +  font-family: var(--font-mono);                              
+       74 +  white-space: nowrap;                                        
+       75 +}                                                             
+       76 +                                                              
+       77 +/* Theme toggle: moon while light is active, sun while dark is
+          + active */                                                    
+       78 +#theme-btn {                                                  
+       79 +  display: inline-grid;                                       
+       80 +  place-items: center;                                        
+       81 +  inline-size: 44px;                                          
+       82 +  block-size: 44px;                                           
+       83 +  background-color: var(--surface);                           
+       84 +  color: var(--text);                                         
+       85 +  border: 1px solid var(--border);                            
+       86 +  border-radius: 50%;                                         
+       87 +  cursor: pointer;                                            
+       88 +  transition: box-shadow var(--transition-fast), border-color 
+          +var(--transition-fast);                                       
+       89 +}                                                             
+       90 +                                                              
+       91 +#theme-btn:hover {                                            
+       92 +  border-color: var(--accent);                                
+       93 +  box-shadow: var(--glow);                                    
+       94 +}                                                             
+       95 +                                                              
+       96 +#theme-btn:active {                                           
+       97 +  background-color: var(--bg);                                
+       98 +}                                                             
+       99 +                                                              
+      100 +#theme-btn[aria-pressed="false"] svg:nth-of-type(2),          
+      101 +#theme-btn[aria-pressed="true"] svg:nth-of-type(1) {          
+      102 +  display: none;                                              
+      103 +}                                                             
+      104 +                                                              
+      105 +/* Hero */                                                    
+      106 +#hero > p:first-of-type {                                     
+      107 +  padding: var(--space-4);                                    
+      108 +  background-color: var(--surface);                           
+      109 +  border: 1px solid var(--border);                            
+      110 +  border-radius: var(--radius-md);                            
+      111 +  font-family: var(--font-mono);                              
+      112 +}                                                             
+      113 +                                                              
+      114 +#hero > p:first-of-type::after {                              
+      115 +  content: "";                                                
+      116 +  display: inline-block;                                      
+      117 +  inline-size: 0.6em;                                         
+      118 +  block-size: 1.1em;                                          
+      119 +  margin-inline-start: var(--space-1);                        
+      120 +  background-color: var(--accent);                            
+      121 +  vertical-align: text-bottom;                                
+      122 +}                                                             
+      123 +                                                              
+      124 +@media (prefers-reduced-motion: no-preference) {              
+      125 +  #hero > p:first-of-type::after {                            
+      126 +    animation: cursor-blink 1.06s steps(1) infinite;          
+      127 +  }                                                           
+      128 +}                                                             
+      129 +                                                              
+      130 +@keyframes cursor-blink {                                     
+      131 +  50% {                                                       
+      132 +    opacity: 0;                                               
+      133 +  }                                                           
+      134 +}                                                             
+      135 +                                                              
+      136 +#hero img {                                                   
+      137 +  border: 2px solid var(--accent);                            
+      138 +  border-radius: var(--radius-lg);                            
+      139 +  box-shadow: var(--glow);                                    
+      140 +}                                                             
+      141 +                                                              
+      142 +#hero figcaption {                                            
+      143 +  margin-block-start: var(--space-2);                         
+      144 +  color: var(--text-muted);                                   
+      145 +  font-size: var(--step--1);                                  
+      146 +}                                                             
+      147 +                                                              
+      148 +/* Buttons and button-like links */                           
+      149 +#hero > p > a,                                                
+      150 +button[type="submit"] {                                       
+      151 +  display: inline-flex;                                       
+      152 +  align-items: center;                                        
+      153 +  justify-content: center;                                    
+      154 +  min-inline-size: 44px;                                      
+      155 +  min-block-size: 44px;                                       
+      156 +  padding: var(--space-2) var(--space-5);                     
+      157 +  background-color: var(--accent);                            
+      158 +  color: var(--on-accent);                                    
+      159 +  border: 0;                                                  
+      160 +  border-radius: var(--radius-md);                            
+      161 +  font-weight: 700;                                           
+      162 +  text-decoration: none;                                      
+      163 +  cursor: pointer;                                            
+      164 +  transition: box-shadow var(--transition-fast), background-co
+          +lor var(--transition-fast);                                   
+      165 +}                                                             
+      166 +                                                              
+      167 +#hero > p > a:hover,                                          
+      168 +button[type="submit"]:hover {                                 
+      169 +  box-shadow: var(--glow);                                    
+      170 +  background-color: color-mix(in srgb, var(--accent) 85%, var(
+          +--text));                                                     
+      171 +}                                                             
+      172 +                                                              
+      173 +#hero > p > a:active,                                         
+      174 +button[type="submit"]:active {                                
+      175 +  background-color: color-mix(in srgb, var(--accent) 70%, var(
+          +--text));                                                     
+      176 +  box-shadow: none;                                           
+      177 +}                                                             
+      178 +                                                              
+      179 +button:disabled {                                             
+      180 +  opacity: 0.6;                                               
+      181 +  cursor: not-allowed;                                        
+      182 +}                                                             
+      183 +                                                              
+      184 +/* About */                                                   
+      185 +dt {                                                          
+      186 +  color: var(--text-muted);                                   
+      187 +  font-family: var(--font-mono);                              
+      188 +  font-size: var(--step--1);                                  
+      189 +}                                                             
+      190 +                                                              
+      191 +dd {                                                          
+      192 +  font-weight: 600;                                           
+      193 +}                                                             
+      194 +                                                              
+      195 +/* Badges and skill pills */                                  
+      196 +.badge,                                                       
+      197 +#skills li {                                                  
+      198 +  display: inline-block;                                      
+      199 +  padding: var(--space-1) var(--space-3);                     
+      200 +  border: 1px solid var(--accent-2);                          
+      201 +  border-radius: 100vmax;                                     
+      202 +  color: var(--text);                                         
+      203 +  font-family: var(--font-mono);                              
+      204 +  font-size: var(--step--1);                                  
+      205 +}                                                             
+      206 +                                                              
+      207 +/* Project cards */                                           
+      208 +.project-card {                                               
+      209 +  padding: var(--space-5);                                    
+      210 +  background-color: var(--surface);                           
+      211 +  border: 1px solid var(--border);                            
+      212 +  border-radius: var(--radius-lg);                            
+      213 +  box-shadow: var(--shadow-sm);                               
+      214 +}                                                             
+      215 +                                                              
+      216 +.project-card:hover,                                          
+      217 +.project-card:focus-within {                                  
+      218 +  border-color: var(--accent);                                
+      219 +  box-shadow: var(--glow), var(--shadow-md);                  
+      220 +}                                                             
+      221 +                                                              
+      222 +@media (prefers-reduced-motion: no-preference) {              
+      223 +  .project-card {                                             
+      224 +    transition: transform var(--transition-fast), box-shadow v
+          +ar(--transition-fast), border-color var(--transition-fast);   
+      225 +  }                                                           
+      226 +                                                              
+      227 +  .project-card:hover,                                        
+      228 +  .project-card:focus-within {                                
+      229 +    transform: translateY(-4px);                              
+      230 +  }                                                           
+      231 +}                                                             
+      232 +                                                              
+      233 +.project-card a {                                             
+      234 +  display: inline-flex;                                       
+      235 +  align-items: center;                                        
+      236 +  min-block-size: 44px;                                       
+      237 +}                                                             
+      238 +                                                              
+      239 +/* Form */                                                    
+      240 +label {                                                       
+      241 +  font-weight: 600;                                           
+      242 +}                                                             
+      243 +                                                              
+      244 +input,                                                        
+      245 +textarea {                                                    
+      246 +  inline-size: 100%;                                          
+      247 +  min-block-size: 44px;                                       
+      248 +  padding: var(--space-2) var(--space-3);                     
+      249 +  background-color: var(--bg-elevated);                       
+      250 +  color: var(--text);                                         
+      251 +  border: 1px solid var(--border);                            
+      252 +  border-radius: var(--radius-md);                            
+      253 +  transition: border-color var(--transition-fast);            
+      254 +}                                                             
+      255 +                                                              
+      256 +textarea {                                                    
+      257 +  min-block-size: 8rem;                                       
+      258 +  resize: vertical;                                           
+      259 +}                                                             
+      260 +                                                              
+      261 +input:hover,                                                  
+      262 +textarea:hover {                                              
+      263 +  border-color: var(--accent);                                
+      264 +}                                                             
+      265 +                                                              
+      266 +input[aria-invalid="true"],                                   
+      267 +textarea[aria-invalid="true"] {                               
+      268 +  border-color: var(--danger);                                
+      269 +  border-width: 2px;                                          
+      270 +}                                                             
+      271 +                                                              
+      272 +.field-hint {                                                 
+      273 +  color: var(--text-muted);                                   
+      274 +  font-size: var(--step--1);                                  
+      275 +}                                                             
+      276 +                                                              
+      277 +.field-error {                                                
+      278 +  color: var(--danger);                                       
+      279 +  font-size: var(--step--1);                                  
+      280 +  font-weight: 600;                                           
+      281 +}                                                             
+      282 +                                                              
+      283 +#form-status {                                                
+      284 +  font-weight: 600;                                           
+      285 +}                                                             
+      286 +                                                              
+      287 +#form-status[data-state="success"] {                          
+      288 +  color: var(--success);                                      
+      289 +}                                                             
+      290 +                                                              
+      291 +#form-status[data-state="error"] {                            
+      292 +  color: var(--danger);                                       
+      293 +}                                                             
+      294 +                                                              
+      295 +/* Footer */                                                  
+      296 +body > footer {                                               
+      297 +  color: var(--text-muted);                                   
+      298 +  border-block-start: 1px solid var(--border);                
+      299 +}                                                             
+      300 +                                                              
+      301 +body > footer a {                                             
+      302 +  color: inherit;                                             
+      303 +}                                                             
+      304 +                                                              
+      305 +address {                                                     
+      306 +  font-style: normal;                                         
+      307 +}                                                             
+
+  Ran 1 shell command (ctrl+o to expand)
+● T-05 đã xong và commit, chưa push.
+
+  - Mã hash: 313eb96
+  - Commit message: feat(css): components & states
+  - File đã commit: css/components.css.
+  - Kiểm tra: Select-String tìm mã hex trong css\components.css ra 0 kết quả.
+    Mình chưa mở trang trên Live Server, nên chưa xem được giao diện thật.
+
+  Nội dung đã làm:
+  - Typography và focus: h1 và h2 dùng font monospace. Tiền tố //  của h2 nằm
+    trong ::before, có văn bản thay thế rỗng nên screen reader không đọc. Link
+    có gạch chân và dày hơn khi hover. Mọi a, button, input, textarea, select có
+    outline 3px --focus-ring và offset 3px khi :focus-visible.
+  - Hero: đoạn giới thiệu kiểu terminal có con trỏ nhấp nháy, chỉ chạy khi không
+    bật giảm chuyển động. Ảnh avatar có viền và --glow.
+  - Nút: hai link trong hero và nút submit đều có kích thước tối thiểu 44×44px,
+    có trạng thái :hover, :active và :disabled.
+  - #theme-btn: tròn 44px. Biểu tượng mặt trăng hiện khi aria-pressed="false",
+    mặt trời hiện khi "true".
+  - Badge và thẻ dự án: .badge có viền --accent-2, chữ --text. Thẻ dự án nâng
+    4px và có glow khi hover hoặc focus-within. Hiệu ứng nâng chỉ bật khi không
+    bật giảm chuyển động.
+  - Form: input và textarea cao tối thiểu 44px. [aria-invalid="true"] đổi viền
+    sang --danger. #form-status đổi màu theo data-state là success hoặc error.
+
+  Mình tự thêm vài chi tiết ngoài danh sách:
+  - Skip-link: có nền accent và chữ --on-accent.
+  - Mục kỹ năng #skills li: dùng chung kiểu pill với .badge.
+  - Link nav và link "Source code": cao tối thiểu 44px.
+  - box-shadow và nền của nút: dùng color-mix với token, không dùng mã màu cứng.
+
+  Hai điểm cần xem lại ở task M1:
+  - Link trong thẻ dự án: màu --accent nằm trên nền --surface. Mình chưa tính tỉ
+    lệ cho cặp này, nên cần đo lại.
+  - Nút khi hover và nhấn: màu nền được pha bằng color-mix, chưa đo tương phản
+    với --on-accent.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-06 và Theme contract).
+  Chỉ làm task T-06: theme engine. Không sửa HTML hay CSS.
+
+  Phạm vi file được sửa: js/theme.js (hiện là stub, ghi đè). File này được nạp
+  trong <head> không defer, nên phần áp dụng theme phải chạy ngay để tránh nháy
+  màu, còn phần gắn sự kiện cho nút phải chờ DOM sẵn sàng.
+
+  Yêu cầu:
+  - Hằng số STORAGE_KEY = 'theme'. Giá trị hợp lệ chỉ 'light' hoặc 'dark'.
+  - Hàm đọc theme đã lưu: bọc localStorage trong try/catch (có thể bị chặn);
+  giá trị không hợp lệ thì bỏ qua.
+  - Theme ban đầu = giá trị đã lưu, nếu không có thì theo
+  window.matchMedia('(prefers-color-scheme: dark)'). Áp dụng bằng
+  document.documentElement.dataset.theme.
+  - Khi DOM sẵn sàng: dùng document.querySelector('#theme-btn'); đặt
+  aria-pressed đúng ('true' khi dark); khi click: đổi theme, cập nhật
+  dataset.theme, aria-pressed và localStorage.setItem('theme', ...).
+  - Nếu người dùng CHƯA từng chọn thủ công thì lắng nghe thay đổi của
+  matchMedia để cập nhật theo hệ điều hành; sau khi đã chọn thủ công thì không
+  bị ghi đè nữa.
+  - Chỉ dùng const/let, arrow function, không var, không innerHTML, không thư
+  viện, không console.log. Không có lỗi trong Console khi bật tắt theme nhiều
+  lần.
+  - Code gọn, đặt tên rõ nghĩa, tách các hàm nhỏ (readStoredTheme, applyTheme,
+  systemPrefersDark...).
+
+  Tự kiểm tra: Select-String -Path js\theme.js -Pattern
+  '\bvar\b|innerHTML|console\.log' phải rỗng.
+
+  Commit:
+  git add js/theme.js
+  git commit -m "feat(js): dark mode engine"
+
+  Không push.
+
+● Write(hw1-portfolio\js\theme.js)
+  ⎿  Added 69 lines, removed 1 line
+       1 -// stub: filled in T-06                                        
+       1 +const STORAGE_KEY = 'theme';                                   
+       2 +const THEMES = ['light', 'dark'];                              
+       3 +                                                               
+       4 +const darkQuery = window.matchMedia('(prefers-color-scheme: dar
+         +k)');                                                          
+       5 +                                                               
+       6 +const isValidTheme = (value) => THEMES.includes(value);        
+       7 +                                                               
+       8 +const readStoredTheme = () => {                                
+       9 +  try {                                                        
+      10 +    const stored = localStorage.getItem(STORAGE_KEY);          
+      11 +    return isValidTheme(stored) ? stored : null;               
+      12 +  } catch {                                                    
+      13 +    return null;                                               
+      14 +  }                                                            
+      15 +};                                                             
+      16 +                                                               
+      17 +const storeTheme = (theme) => {                                
+      18 +  try {                                                        
+      19 +    localStorage.setItem(STORAGE_KEY, theme);                  
+      20 +  } catch {                                                    
+      21 +    // Storage can be blocked; the theme still applies for this
+         + visit.                                                        
+      22 +  }                                                            
+      23 +};                                                             
+      24 +                                                               
+      25 +const systemPrefersDark = () => darkQuery.matches;             
+      26 +                                                               
+      27 +const getSystemTheme = () => (systemPrefersDark() ? 'dark' : 'l
+         +ight');                                                        
+      28 +                                                               
+      29 +const applyTheme = (theme) => {                                
+      30 +  document.documentElement.dataset.theme = theme;              
+      31 +};                                                             
+      32 +                                                               
+      33 +const syncButton = (button, theme) => {                        
+      34 +  button.setAttribute('aria-pressed', String(theme === 'dark'))
+         +;                                                              
+      35 +};                                                             
+      36 +                                                               
+      37 +const handleSystemChange = (event) => {                        
+      38 +  applyTheme(event.matches ? 'dark' : 'light');                
+      39 +  const button = document.querySelector('#theme-btn');         
+      40 +  if (button) {                                                
+      41 +    syncButton(button, document.documentElement.dataset.theme);
+      42 +  }                                                            
+      43 +};                                                             
+      44 +                                                               
+      45 +const initButton = (hasStoredChoice) => {                      
+      46 +  const button = document.querySelector('#theme-btn');         
+      47 +  if (!button) {                                               
+      48 +    return;                                                    
+      49 +  }                                                            
+      50 +                                                               
+      51 +  syncButton(button, document.documentElement.dataset.theme);  
+      52 +                                                               
+      53 +  button.addEventListener('click', () => {                     
+      54 +    const nextTheme = document.documentElement.dataset.theme ==
+         += 'dark' ? 'light' : 'dark';                                   
+      55 +    applyTheme(nextTheme);                                     
+      56 +    syncButton(button, nextTheme);                             
+      57 +    storeTheme(nextTheme);                                     
+      58 +    darkQuery.removeEventListener('change', handleSystemChange)
+         +;                                                              
+      59 +  });                                                          
+      60 +};                                                             
+      61 +                                                               
+      62 +const storedTheme = readStoredTheme();                         
+      63 +applyTheme(storedTheme ?? getSystemTheme());                   
+      64 +                                                               
+      65 +if (storedTheme === null) {                                    
+      66 +  darkQuery.addEventListener('change', handleSystemChange);    
+      67 +}                                                              
+      68 +                                                               
+      69 +document.addEventListener('DOMContentLoaded', () => initButton(
+         +storedTheme !== null), { once: true });                        
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● T-06 đã xong và commit, chưa push.
+
+  - Mã hash: 57ced8f
+  - Commit message: feat(js): dark mode engine
+  - File đã commit: js/theme.js.
+
+  Kiểm tra:
+  - Select-String tìm var, innerHTML và console.log trong js\theme.js ra 0 kết
+    quả.
+  - node --check báo cú pháp hợp lệ.
+  - Mình chưa mở trang để bật tắt theme, nên cần bạn thử tay: bật tắt nhiều lần,
+    tải lại trang, và xem Console.
+
+  Cách hoạt động:
+  - Áp theme ngay khi nạp: phần này chạy trong <head> trước khi DOM xong, nên
+    không bị nháy màu. Theme lấy từ localStorage (key theme, chỉ nhận light hoặc
+    dark). Nếu không có thì theo prefers-color-scheme.
+  - Nút #theme-btn: được gắn khi DOMContentLoaded. Mỗi lần bấm, script đổi
+    data-theme, aria-pressed và localStorage.
+  - Đổi theo hệ điều hành: chỉ lắng nghe khi chưa có lựa chọn đã lưu. Khi người
+    dùng bấm nút lần đầu, listener này bị gỡ để không ghi đè lựa chọn thủ công.
+  - Bị chặn localStorage: đọc và ghi đều nằm trong try/catch. Theme vẫn đổi
+    trong lượt truy cập đó, chỉ là không được nhớ.
+
+  Hai điểm cần lưu ý:
+  - Tên hàm: mình dùng readStoredTheme, applyTheme, systemPrefersDark đúng như
+    bạn gợi ý. Thêm các hàm storeTheme, getSystemTheme, syncButton,
+    handleSystemChange, initButton.
+  - Nhánh catch của storeTheme: chỉ có một dòng comment giải thích lý do bỏ qua
+    lỗi, không có lệnh nào.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục T-07 và Form contract).
+  Chỉ làm task T-07: validation cho form liên hệ. Không sửa HTML hay CSS.
+
+  Phạm vi file được sửa: js/contact-form.js (hiện là stub, ghi đè). File này
+  nạp bằng type="module" nên chạy sau khi DOM sẵn sàng.
+
+  Yêu cầu:
+  - Lấy form bằng document.querySelector('#contact-form'). Nếu không tồn tại
+  thì dừng yên lặng.
+  - Khi submit: preventDefault; kiểm tra từng trường bằng Constraint Validation
+  API (checkValidity, validity, validationMessage). Với mỗi trường lỗi: ghi
+  thông báo THÂN THIỆN bằng tiếng Anh vào p.field-error tương ứng bằng
+  textContent, đặt aria-invalid="true"; chuyển focus vào trường lỗi đầu tiên.
+  - Khi người dùng sửa trường (sự kiện input) thì xóa lỗi của trường đó và
+  aria-invalid.
+  - Khi tất cả hợp lệ: không gửi mạng. Hiển thị trong p#form-status
+  (textContent) lời cảm ơn có tên người dùng, đặt data-state="success", reset
+  form, trả focus về form hoặc status.
+  - Tên người dùng chỉ được chèn bằng textContent. Cấm innerHTML,
+  insertAdjacentHTML, outerHTML, document.write.
+  - const/let, không var, không console.log, không thư viện. Dùng
+  event.preventDefault(), không dùng thuộc tính onsubmit.
+  - Tách hàm nhỏ: getFields, showError, clearError, validateForm, showSuccess.
+
+  Tự kiểm tra: Select-String -Path js\contact-form.js -Pattern
+  '\bvar\b|innerHTML|outerHTML|insertAdjacentHTML|document\.write|console\.log'
+  phải rỗng.
+
+  Commit:
+  git add js/contact-form.js
+  git commit -m "feat(js): contact form validation"
+
+  Không push.
+
+● Write(hw1-portfolio\js\contact-form.js)
+  ⎿  Added 97 lines, removed 1 line
+       1 -// stub: filled in T-07                                        
+       1 +const form = document.querySelector('#contact-form');          
+       2 +                                                               
+       3 +const FIELD_IDS = ['name', 'email', 'message'];                
+       4 +                                                               
+       5 +const getFields = () => FIELD_IDS.map((id) => form.querySelecto
+         +r(`#${id}`));                                                  
+       6 +                                                               
+       7 +const getErrorElement = (field) => form.querySelector(`#${field
+         +.id}-error`);                                                  
+       8 +                                                               
+       9 +const getStatusElement = () => form.querySelector('#form-status
+         +');                                                            
+      10 +                                                               
+      11 +const getErrorMessage = (field) => {                           
+      12 +  const { validity } = field;                                  
+      13 +                                                               
+      14 +  if (validity.valueMissing) {                                 
+      15 +    return `Please enter your ${field.id}.`;                   
+      16 +  }                                                            
+      17 +  if (validity.typeMismatch) {                                 
+      18 +    return 'Please enter a valid email address, like name@examp
+         +le.com.';                                                      
+      19 +  }                                                            
+      20 +  if (validity.tooShort) {                                     
+      21 +    return `Please use at least ${field.minLength} characters.`
+         +;                                                              
+      22 +  }                                                            
+      23 +  if (validity.tooLong) {                                      
+      24 +    return `Please keep it under ${field.maxLength} characters.
+         +`;                                                             
+      25 +  }                                                            
+      26 +  return field.validationMessage;                              
+      27 +};                                                             
+      28 +                                                               
+      29 +const showError = (field) => {                                 
+      30 +  getErrorElement(field).textContent = getErrorMessage(field); 
+      31 +  field.setAttribute('aria-invalid', 'true');                  
+      32 +};                                                             
+      33 +                                                               
+      34 +const clearError = (field) => {                                
+      35 +  getErrorElement(field).textContent = '';                     
+      36 +  field.removeAttribute('aria-invalid');                       
+      37 +};                                                             
+      38 +                                                               
+      39 +const clearStatus = () => {                                    
+      40 +  const status = getStatusElement();                           
+      41 +  status.textContent = '';                                     
+      42 +  status.removeAttribute('data-state');                        
+      43 +};                                                             
+      44 +                                                               
+      45 +const validateForm = () => {                                   
+      46 +  const fields = getFields();                                  
+      47 +  let firstInvalid = null;                                     
+      48 +                                                               
+      49 +  fields.forEach((field) => {                                  
+      50 +    field.value = field.value.trim();                          
+      51 +    if (field.checkValidity()) {                               
+      52 +      clearError(field);                                       
+      53 +      return;                                                  
+      54 +    }                                                          
+      55 +    showError(field);                                          
+      56 +    firstInvalid ??= field;                                    
+      57 +  });                                                          
+      58 +                                                               
+      59 +  if (firstInvalid) {                                          
+      60 +    firstInvalid.focus();                                      
+      61 +  }                                                            
+      62 +  return firstInvalid === null;                                
+      63 +};                                                             
+      64 +                                                               
+      65 +const showSuccess = (senderName) => {                          
+      66 +  const status = getStatusElement();                           
+      67 +  status.textContent = `Thank you, ${senderName}! Your message 
+         +is ready to send.`;                                            
+      68 +  status.dataset.state = 'success';                            
+      69 +  status.tabIndex = -1;                                        
+      70 +  status.focus();                                              
+      71 +};                                                             
+      72 +                                                               
+      73 +const handleSubmit = (event) => {                              
+      74 +  event.preventDefault();                                      
+      75 +  clearStatus();                                               
+      76 +                                                               
+      77 +  if (!validateForm()) {                                       
+      78 +    return;                                                    
+      79 +  }                                                            
+      80 +                                                               
+      81 +  const senderName = form.querySelector('#name').value;        
+      82 +  form.reset();                                                
+      83 +  showSuccess(senderName);                                     
+      84 +};                                                             
+      85 +                                                               
+      86 +const handleInput = (event) => {                               
+      87 +  if (FIELD_IDS.includes(event.target.id)) {                   
+      88 +    clearError(event.target);                                  
+      89 +  }                                                            
+      90 +};                                                             
+      91 +                                                               
+      92 +if (form) {                                                    
+      93 +  // Take over validation from the browser so errors appear in 
+         +the page, not in native bubbles.                               
+      94 +  form.noValidate = true;                                      
+      95 +  form.addEventListener('submit', handleSubmit);               
+      96 +  form.addEventListener('input', handleInput);                 
+      97 +}                                                              
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● T-07 đã xong và commit, chưa push.
+
+  - Mã hash: 22516e2
+  - Commit message: feat(js): contact form validation
+  - File đã commit: js/contact-form.js.
+
+  Kiểm tra: Select-String tìm var, innerHTML, outerHTML, insertAdjacentHTML,
+  document.write và console.log ra 0 kết quả. node --check báo cú pháp hợp lệ.
+  Mình chưa mở trang để thử gửi form, nên cần bạn thử tay các trường hợp rỗng,
+  email sai, tin nhắn quá ngắn và hợp lệ.
+
+  Cách hoạt động:
+  - Submit: gọi event.preventDefault(), cắt khoảng trắng đầu và cuối từng
+    trường, rồi kiểm tra bằng checkValidity() và validity.
+  - Trường lỗi: ghi thông báo tiếng Anh vào p.field-error bằng textContent, đặt
+    aria-invalid="true", rồi chuyển focus vào trường lỗi đầu tiên.
+  - Khi sửa trường: sự kiện input xóa lỗi và aria-invalid của trường đó.
+  - Khi hợp lệ: không gửi mạng. #form-status hiện lời cảm ơn kèm tên người dùng
+    bằng textContent, đặt data-state="success", form được reset và focus chuyển
+    vào #form-status.
+  - Tên hàm: có đủ getFields, showError, clearError, validateForm, showSuccess.
+    Mình thêm vài hàm nhỏ phụ trợ như getErrorMessage, clearStatus.
+
+  Hai quyết định bạn cần biết:
+  1. Mình đặt form.noValidate = true bằng JS. HTML không có novalidate theo yêu
+     cầu của bạn. Nhưng nếu để vậy, trình duyệt tự chặn submit và hiện bong bóng
+     lỗi mặc định, nên submit không bao giờ chạy và thông báo của mình không
+     hiện. Cách này không sửa HTML. Hệ quả: nếu JS không chạy thì form vẫn dùng
+     được validation native.
+  2. Lời cảm ơn là "Your message is ready to send." Vì form không gửi đi đâu,
+     mình tránh câu khẳng định đã gửi thật. Nếu muốn đổi lời, sửa ở showSuccess.
+
+  Ngoài ra, #form-status được gán tabindex="-1" bằng JS để nhận focus được, và
+  thông báo lỗi giữ nguyên tên trường (name, email, message) trong câu "Please
+  enter your …".
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục M1). Làm milestone M1:
+  kiểm toán WCAG 2.2 AA thật sự cho trang hiện tại rồi sửa các lỗi tìm được.
+  Không sửa gì ngoài phạm vi M1.
+
+  Phạm vi file: có thể sửa index.html và các file trong css/ NẾU audit tìm ra
+  lỗi; bắt buộc tạo docs/audit/m1-wcag.md (tiếng Anh).
+
+  Các bước:
+  1. Đọc index.html và 3 file css để audit. Kiểm tra cả theme sáng và theme
+  tối.
+  2. Contrast: lập danh sách mọi cặp chữ/nền và thành phần UI thực tế đang dùng
+  (kể cả chữ trên thẻ, badge, nút, link, chữ hint/lỗi/placeholder, trạng thái
+  hover và focus). Tính tỉ lệ bằng một lệnh Python/Node chạy một lần (đừng lưu
+  script vào repo). Chuẩn: chữ thường >= 4.5:1, chữ lớn >= 3:1, UI/focus >=
+  3:1.
+  3. Landmark và cấu trúc: đúng 1 h1; không nhảy cấp heading; có đủ
+  banner/navigation/main/contentinfo; skip-link trỏ đúng #main-content; mọi
+  section có tên truy cập; mọi form control có label; ảnh có alt, width,
+  height; link có tên rõ ràng; lang="en".
+  4. WCAG 2.2 mới: Target Size tối thiểu 24x24px (2.5.8); Focus Not Obscured
+  (2.4.11) - kiểm tra header sticky có che phần tử đang focus hoặc tiêu đề khi
+  nhảy anchor không (scroll-padding-top / scroll-margin-top); Consistent Help;
+  Redundant Entry.
+  5. Sửa MỌI lỗi thật tìm thấy bằng thay đổi nhỏ nhất có thể. Không viết lại cả
+  file. Không thêm tính năng. Nếu không có lỗi ở một hạng mục thì ghi "pass"
+  và nêu bằng chứng.
+  6. Viết docs/audit/m1-wcag.md gồm: phương pháp, bảng contrast (cặp màu, tỉ
+  lệ, kết quả, theme), danh sách lỗi tìm được với trạng thái before/after, các
+  hạng mục pass. Chỉ ghi những gì thực sự đã đo và sửa. Không bịa lỗi.
+
+  Báo cáo bằng tiếng Việt: các lỗi thật đã tìm thấy và đã sửa.
+
+  Commit (chỉ các file đã thay đổi, liệt kê tường minh):
+  git commit -m "fix(a11y): contrast & landmarks"
+
+  Không push.
+
+  Made 1 scratchpad edit +121, ran 4 shell commands (ctrl+o to expand)
+
+● Auditing with a real headless Chrome run; reading the measurements now.
+
+  Ran 2 shell commands (ctrl+o to expand)
+  ⎿  Interrupted · What should Claude do instead?

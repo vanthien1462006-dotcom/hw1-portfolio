@@ -1,0 +1,588 @@
+
+> /clear
+
+> <ide_opened_file>The user opened the file c:\Users\USER\Downloads\2026-10-14-
+  151704-local-command-caveatthe-command-below-was-run-d.txt in the IDE. This
+  may or may not be related to the current task.</ide_opened_file>
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục M1). Làm milestone M1:
+  kiểm toán WCAG 2.2 AA thật sự cho trang hiện tại rồi sửa các lỗi tìm được.
+  Không sửa gì ngoài phạm vi M1.
+
+  Phạm vi file: có thể sửa index.html và các file trong css/ NẾU audit tìm ra
+  lỗi; bắt buộc tạo docs/audit/m1-wcag.md (tiếng Anh).
+
+  Các bước:
+  1. Đọc index.html và 3 file css để audit. Kiểm tra cả theme sáng và theme
+  tối.
+  2. Contrast: lập danh sách mọi cặp chữ/nền và thành phần UI thực tế đang dùng
+  (kể cả chữ trên thẻ, badge, nút, link, chữ hint/lỗi/placeholder, trạng thái
+  hover và focus). Tính tỉ lệ bằng một lệnh Python/Node chạy một lần (đừng lưu
+  script vào repo). Chuẩn: chữ thường >= 4.5:1, chữ lớn >= 3:1, UI/focus >=
+  3:1.
+  3. Landmark và cấu trúc: đúng 1 h1; không nhảy cấp heading; có đủ
+  banner/navigation/main/contentinfo; skip-link trỏ đúng #main-content; mọi
+  section có tên truy cập; mọi form control có label; ảnh có alt, width,
+  height; link có tên rõ ràng; lang="en".
+  4. WCAG 2.2 mới: Target Size tối thiểu 24x24px (2.5.8); Focus Not Obscured
+  (2.4.11) - kiểm tra header sticky có che phần tử đang focus hoặc tiêu đề khi
+  nhảy anchor không (scroll-padding-top / scroll-margin-top); Consistent Help;
+  Redundant Entry.
+  5. Sửa MỌI lỗi thật tìm thấy bằng thay đổi nhỏ nhất có thể. Không viết lại cả
+  file. Không thêm tính năng. Nếu không có lỗi ở một hạng mục thì ghi "pass"
+  và nêu bằng chứng.
+  6. Viết docs/audit/m1-wcag.md gồm: phương pháp, bảng contrast (cặp màu, tỉ
+  lệ, kết quả, theme), danh sách lỗi tìm được với trạng thái before/after, các
+  hạng mục pass. Chỉ ghi những gì thực sự đã đo và sửa. Không bịa lỗi.
+
+  Báo cáo bằng tiếng Việt: các lỗi thật đã tìm thấy và đã sửa.
+
+  Commit (chỉ các file đã thay đổi, liệt kê tường minh):
+  git commit -m "fix(a11y): contrast & landmarks"
+
+  Không push.
+
+  Searched for 1 pattern, read 7 files, ran 3 shell commands (ctrl+o to expand)
+  ⎿  Loaded hw1-portfolio\CLAUDE.md
+
+● Contrast checks pass everywhere, but the sticky header is taller than
+  scroll-padding-top at several widths, and the nav scrolls horizontally on
+  mobile. Next I'll check for focus-ring clipping and whether the header covers
+  content after anchor jumps and Tab navigation. · summary
+
+  Read 1 file, ran 5 shell commands (ctrl+o to expand)
+
+● Layout offsets are updated. The nav focus-ring edit didn't apply (my script
+  was a no-op), so I'm doing it with the editor now.
+
+● Update(css\components.css)
+  ⎿  Added 5 lines
+      74    white-space: nowrap;
+      75  }
+      76  
+      77 +/* The nav scrolls and clips outlines, so its focus ring is dra
+         +wn inside the link */                                          
+      78 +nav a:focus-visible {                                          
+      79 +  outline-offset: -3px;                                        
+      80 +}                                                              
+      81 +                                                               
+      82  /* Theme toggle: moon while light is active, sun while dark is 
+          active */
+      83  #theme-btn {
+      84    display: inline-grid;
+
+● Now I'll re-run the checks on the fixed CSS: nav focus screenshot, shift-tab,
+  and anchors.
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+● Write(docs\audit\m1-wcag.md)
+  ⎿  Wrote 89 lines to docs\audit\m1-wcag.md
+      1 # M1: WCAG 2.2 AA audit
+      3 Scope: `index.html` and `css/*.css`, light and dark theme. Date:
+      4
+      6
+        ut.css`, `css/components.css`.
+      8 - Contrast: a throw-away Python script (not stored in the repo) c
+        and UI/background pair that the CSS produces. Hover and active co
+        ts on the background grid, the grid line was blended in as the wo
+      9 - Structure and layout: headless Chrome driven over the DevTools
+        r HTTP and meas
+     … +160 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● M1 xong: audit tìm ra 2 lỗi thật, cả hai đã sửa và đo lại. Không có lỗi
+  contrast nào. Commit 5a43f0d (fix(a11y): contrast & landmarks), chưa push.
+
+  Lỗi đã sửa
+  1. 2.4.11 Focus Not Obscured: header sticky cao hơn --header-offset. Header
+     cao 172px ở màn hẹp, 121px ở 1000px, trong khi offset chỉ là 144px và 96px.
+     - Khi Shift+Tab, ô Email ở 375px nằm dưới header 28px.
+     - Link mailto ở 1024px bị che hoàn toàn.
+     - Đã đổi offset trong layout.css (css/layout.css) từ 9rem/6rem sang
+       11.5rem/8.5rem. Chạy lại cả hai ca trên và chạy Tab/Shift+Tab ở 375, 768,
+       1024, 1280px thì không còn phần tử nào bị che.
+  2. 2.4.7 / 1.4.11 Focus Visible: nav có overflow-x: auto nên vòng focus 3px bị
+     cắt ở trên, dưới và trái. Ảnh chụp ở 375px chỉ còn một vạch dọc.
+     - Đã thêm nav a:focus-visible { outline-offset: -3px; } trong
+       components.css (css/components.css). Ảnh chụp lại cho thấy vòng focus đầy
+       đủ.
+
+  Các hạng mục pass (bằng chứng chi tiết trong docs/audit/m1-wcag.md)
+  - Contrast: tính cho cả hai theme, gồm chữ, badge, nút, link, hint, lỗi,
+    hover/active, viền input và focus ring. Tất cả đạt, chữ thường thấp nhất là
+    5.08:1.
+  - Cấu trúc:
+    - lang="en", 1 h1, không nhảy cấp heading.
+    - Có đủ banner, navigation, main, contentinfo.
+    - Skip-link trỏ đúng #main-content.
+    - 5 section đều có tên truy cập, 3 form control đều có label.
+    - Ảnh có alt, width, height.
+  - WCAG 2.2: Target Size đạt (mọi control cao ít nhất 44px, hai link mailto cao
+    21px thuộc diện miễn trừ). Consistent Help không áp dụng (trang đơn, không
+    có cơ chế trợ giúp lặp lại). Redundant Entry đạt.
+
+  Báo cáo, không sửa vì ngoài phạm vi M1
+  - 3 link "Source code" dùng href="#", cần thay bằng URL repo thật.
+  - Dưới khoảng 440px, nav cuộn ngang trong header nên "Contact" nằm ngoài màn
+    hình ở 375px. Link vẫn tới được bằng cảm ứng và bàn phím, nên tôi không tính
+    là lỗi.
+
+  Script đo (Python và Node điều khiển Chrome) chỉ nằm trong thư mục scratchpad,
+  không vào repo. Tôi dùng python -m http.server tạm để phục vụ trang khi đo,
+  không dùng Live Server, và đã tắt sau khi xong.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục M2). Làm milestone M2:
+  kiểm toán bẫy bàn phím (keyboard trap) và luồng Tab/Enter cho toàn trang.
+  Không làm việc ngoài phạm vi M2.
+
+  Phạm vi file: có thể sửa index.html, css/.css, js/.js NẾU audit tìm ra lỗi
+  thật; bắt buộc tạo docs/audit/m2-keyboard.md (tiếng Anh). QUAN TRỌNG: không
+  gộp HTML với CSS, hay CSS với JS, trong cùng một commit.
+
+  Các bước:
+  1. Đọc code và lập thứ tự Tab dự kiến của trang (skip-link -> link nav -> nút
+  theme -> link hero -> ... -> form -> link nguồn -> footer). Kiểm tra không
+  có tabindex dương, không có phần tử tương tác giả (div/span có click), không
+  có phần tử bị ẩn bằng display/visibility nhưng vẫn focus được và không có
+  phần tử focus được mà bị che hoặc nằm ngoài màn hình.
+  2. Kiểm tra từng điều kiện: (a) không có keyboard trap (WCAG 2.1.2): mọi phần
+  tử focus vào được thì cũng thoát ra được bằng Tab/Shift+Tab; (b) skip-link
+  nhảy tới main và focus tiếp theo nằm TRONG main; main có tabindex="-1" nếu
+  cần; (c) :focus-visible nhìn thấy rõ ở cả hai theme; (d) nút theme hoạt động
+  bằng Enter và Space; (e) form: Enter gửi form, lỗi đưa focus tới trường đầu
+  tiên lỗi; (f) sticky header không che phần tử đang focus (WCAG 2.4.11).
+  3. Sửa mọi lỗi thật bằng thay đổi nhỏ nhất. Nếu một hạng mục đã đạt, ghi
+  "pass" và nêu lý do.
+  4. Viết docs/audit/m2-keyboard.md: bảng thứ tự Tab thực tế (số thứ tự, phần
+  tử, tên truy cập), kết quả từng điều kiện, lỗi tìm được và cách sửa. Chỉ ghi
+  điều thực sự đã kiểm tra.
+
+  Báo cáo bằng tiếng Việt: hướng dẫn tôi cách tự kiểm tra bằng bàn phím (không
+  dùng chuột) để chụp ảnh minh chứng.
+
+  Commit: mỗi commit chỉ chứa MỘT loại file (HTML, hoặc CSS, hoặc JS, hoặc tài
+  liệu). Luôn git add với đường dẫn tường minh, không dùng git add . hay -A.
+  - Commit 1 = các file của MỘT loại (loại quan trọng nhất với lỗi tìm thấy),
+  message đúng như sau:
+    git commit -m "fix(nav): keyboard trap prevention"
+  - Nếu còn lỗi ở loại file khác: mỗi loại một commit riêng, cùng tiền tố, thêm
+  phạm vi ngắn, ví dụ "fix(nav): visible focus ring".
+  - Cuối cùng, commit tài liệu riêng:
+    git add docs/audit/m2-keyboard.md
+    git commit -m "docs(audit): record M2 results"
+  - Nếu audit không tìm thấy lỗi: chỉ làm commit tài liệu với message
+  "fix(nav): keyboard trap prevention", ghi rõ trong tài liệu là không có lỗi
+  kèm bằng chứng. Không bịa lỗi.
+
+  Không push, không amend.
+
+  Read 4 files, ran 4 shell commands (ctrl+o to expand)
+
+● Update(css\components.css)
+  ⎿  Added 6 lines
+      48    outline-offset: 3px;
+      49  }
+      50  
+      51 +/* Programmatic focus targets (main after the skip-link, the fo
+         +rm status): same ring, drawn inside the box */                 
+      52 +[tabindex="-1"]:focus-visible {                                
+      53 +  outline: 3px solid var(--focus-ring);                        
+      54 +  outline-offset: -3px;                                        
+      55 +}                                                              
+      56 +                                                               
+      57  /* Skip link */
+      58  .skip-link {
+      59    padding: var(--space-3) var(--space-4);
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● Write(docs\audit\m2-keyboard.md)
+  ⎿  Wrote 76 lines to docs\audit\m2-keyboard.md
+      1 # M2: Keyboard trap and Tab/Enter flow audit
+      3 Scope: whole page (`index.html`, `css/*.css`, `js/theme.js`, `js/
+      4
+      5 ## Method
+      7 - Read the HTML, CSS and both scripts and wrote down the expected
+      8 - Drove headless Chrome over the DevTools protocol with real key
+        The page was served over HTTP. The scripts were throw-away and ar
+        e not stored in the repo.
+        whether it is inside `main`, computed `display`/`visibility`, whe
+        d the computed
+     … +138 lines (ctrl+o to expand)
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● M2 xong. Audit không tìm thấy keyboard trap hay lỗi thứ tự Tab, chỉ có một lỗi
+  nhỏ về focus ring và đã sửa. Chưa push, không amend.
+
+  Kết quả kiểm tra (Chrome headless gửi phím thật, cả hai theme, 1280px và
+  375px, Tab và Shift+Tab)
+  - Thứ tự Tab: có 17 điểm dừng, đúng thứ tự trực quan: skip-link, 4 link nav,
+    nút theme, 2 link hero, 3 link "Source code", link mailto, Name, Email,
+    Message, Send, link footer. Sau đó focus rời trang rồi quay lại skip-link.
+    Bảng đầy đủ nằm trong docs/audit/m2-keyboard.md.
+  - Không có: tabindex dương, phần tử tương tác giả, phần tử focus được nhưng bị
+    ẩn, bị che hoặc nằm ngoài màn hình.
+  - Keyboard trap (2.1.2): không có, đi tiến và lùi đều thoát được.
+  - Skip-link: Enter đưa focus vào main, Tab kế tiếp tới "View projects" nằm
+    trong main.
+  - Nút theme: Enter và Space đều đổi theme, aria-pressed và localStorage cập
+    nhật đúng.
+  - Form: Enter trong ô Name hoặc trên nút Send đều gửi form. Khi có lỗi, focus
+    nhảy tới trường lỗi đầu tiên (Name, hoặc Email nếu Name hợp lệ). Enter trong
+    textarea chỉ xuống dòng, đúng hành vi mặc định.
+  - Header sticky (2.4.11): không che phần tử nào đang focus, sau khi M1 đã sửa
+    offset.
+
+  Lỗi đã sửa
+  - Sau khi nhấn Enter trên skip-link, main (và #form-status sau khi gửi thành
+    công) chỉ có vòng focus mặc định của trình duyệt, mảnh khoảng 1px, màu không
+    theo token.
+  - Tôi thêm một rule trong components.css (css/components.css) để dùng vòng 3px
+    theo --focus-ring, vẽ bên trong khung. Chụp lại ở cả hai theme thì vòng
+    hiện rõ.
+
+  Commit
+  - 7fc28e4 fix(nav): keyboard trap prevention, chỉ có css/components.css.
+  - d10fadb docs(audit): record M2 results, chỉ có docs/audit/m2-keyboard.md.
+
+  Trong thư mục js/ và index.html không có gì cần sửa, nên không có commit JS
+  hay HTML.
+
+  Cách tự kiểm tra bằng bàn phím để chụp ảnh minh chứng
+  1. Mở http://localhost:5500 bằng Live Server. Click vào nền trang một lần, sau
+     đó không dùng chuột nữa.
+  2. Nhấn Tab lần lượt. Bạn sẽ thấy đúng 17 điểm dừng, mỗi điểm có viền dày.
+     Chụp ảnh ở điểm 1 (skip-link), 6 (nút theme), 13 (Name) và 16 (Send).
+  3. Ở điểm 1 nhấn Enter: cả vùng main có viền bao quanh. Nhấn Tab một lần,
+     focus sang "View projects". Chụp ảnh bước này.
+  4. Ở nút theme nhấn Enter, rồi Space. Theme đổi mỗi lần. Chụp lại các ảnh
+     focus ở theme còn lại.
+  5. Để trống form, tab tới Name rồi nhấn Enter. Ba lỗi hiện ra và focus ở Name.
+     Chụp ảnh.
+  6. Nhấn Shift+Tab nhiều lần để xác nhận thứ tự ngược và focus rời được trang ở
+     cả hai đầu.
+
+  Tôi đã tắt server python -m http.server tạm dùng để đo.
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục M3). Làm milestone M3:
+  Content-Security-Policy nghiêm ngặt và loại bỏ hoàn toàn inline handler.
+  Không làm việc ngoài phạm vi M3.
+
+  Phạm vi file: có thể sửa index.html và js/.js, css/.css NẾU cần; bắt buộc tạo
+  docs/audit/m3-security.md (tiếng Anh). QUAN TRỌNG: không gộp HTML với CSS,
+  hay CSS với JS, trong cùng một commit.
+
+  Các bước:
+  1. Quét toàn repo: Select-String tìm
+  onclick|onload|onerror|onsubmit|onchange|on[a-z]+= trong index.html; thuộc
+  tính style=; thẻ <style> và <script> nội tuyến; javascript: URL;
+  innerHTML|outerHTML|insertAdjacentHTML|document.write|eval|new Function trong
+  js/. Báo kết quả.
+  2. Loại bỏ mọi vi phạm tìm thấy (nếu có). Link target="_blank" phải có
+  rel="noopener noreferrer".
+  3. Thêm một thẻ <meta http-equiv="Content-Security-Policy"> làm phần tử đầu
+  tiên sau meta charset trong <head> với chính sách chặt chẽ: default-src
+  'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src
+  'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; object-src
+  'none'. Không dùng 'unsafe-inline' hay 'unsafe-eval'.
+  4. Giải thích trong tài liệu: những header không thể đặt bằng thẻ meta
+  (frame-ancestors, X-Content-Type-Options, Referrer-Policy qua header,
+  Permissions-Policy) và nên cấu hình ở server khi triển khai thật.
+  5. Viết docs/audit/m3-security.md: các lệnh quét đã chạy và kết quả, chính
+  sách CSP kèm giải thích từng directive, hạn chế của CSP qua meta, danh sách
+  vi phạm đã sửa (nếu không có thì ghi rõ "none found").
+
+  Không tự chạy trình duyệt. Hướng dẫn tôi cách kiểm tra Console xem có lỗi CSP
+  không.
+
+  Commit: mỗi commit chỉ chứa MỘT loại file. Luôn git add với đường dẫn tường
+  minh, không dùng git add . hay -A.
+  - Commit 1 = index.html (thẻ meta CSP và các sửa trong HTML), message đúng
+  như sau:
+    git add index.html
+    git commit -m "fix(security): strict CSP & zero inline handlers"
+  - Nếu cần sửa CSS (ví dụ bỏ style= hay <style> nội tuyến chuyển sang file)
+  hoặc JS: mỗi loại một commit riêng, cùng tiền tố, thêm phạm vi ngắn, ví dụ
+  "fix(security): remove unsafe patterns in scripts".
+  - Cuối cùng, commit tài liệu riêng:
+    git add docs/audit/m3-security.md
+    git commit -m "docs(audit): record M3 results"
+  - Nếu trang đã đủ chặt và chỉ cần thêm CSP: commit 1 vẫn là index.html như
+  trên. Không bịa vi phạm.
+
+  Không push, không amend.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(index.html)
+  ⎿  Added 1 line
+      2  <html lang="en">
+      3  <head>
+      4    <meta charset="UTF-8">
+      5 +  <meta http-equiv="Content-Security-Policy" content="default-sr
+        +c 'none'; script-src 'self'; style-src 'self'; img-src 'self' da
+        +ta:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-
+        +action 'self'; object-src 'none'">                              
+      6    <meta name="viewport" content="width=device-width, initial-sca
+         le=1">
+      7    <title>Vo Van Thien | Full-Stack Developer Portfolio</title>
+      8    <meta name="description" content="Portfolio of Vo Van Thien, a
+         n Information Systems student at UIT, VNU-HCM, focused on full-s
+         tack web development.">
+
+● Write(docs\audit\m3-security.md)
+  ⎿  Wrote 79 lines to docs\audit\m3-security.md
+       1 # M3: Strict CSP and zero inline handlers
+       2
+       3 Scope: `index.html`, `css/*.css`, `js/*.js`, `assets/*.svg`. Dat
+         e: 2026-10-14.
+       4
+       6
+       7 All scans were run on the repository before any change.
+       8
+       9 | # | Looking for | Files | Result |
+      10 |---|-------------|-------|--------|
+     … +145 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● M3 xong. Quét toàn repo không tìm thấy vi phạm nào, nên chỉ cần thêm thẻ CSP.
+  Chưa push, không amend, và tôi không chạy trình duyệt nên CSP chưa được kiểm
+  thử thật.
+
+  Kết quả quét
+
+  ┌──────────────────────────────────────────────┬──────────────────────────┐
+  │                   Mục quét                   │         Kết quả          │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ Inline handler on*= trong index.html         │ 0                        │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ Thuộc tính style= (HTML và SVG)              │ 0                        │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ <style> hoặc <script> nội tuyến              │ 0 (chỉ có 2 thẻ <script  │
+  │                                              │ src> trỏ tới file ngoài) │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ URL javascript:                              │ 0                        │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ innerHTML, outerHTML, insertAdjacentHTML,    │ 0                        │
+  │ document.write, eval, new Function trong js/ │                          │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │ target="_blank"                              │ 0 (không có link nào     │
+  │                                              │ dùng)                    │
+  ├──────────────────────────────────────────────┼──────────────────────────┤
+  │                                              │ 5 kết quả, không cái nào │
+  │ URL ngoài, @import, url(                     │  là request mạng (xem    │
+  │                                              │ dưới)                    │
+  └──────────────────────────────────────────────┴──────────────────────────┘
+
+  5 kết quả cuối là hai namespace xmlns của SVG và ba tham chiếu gradient nội bộ
+  fill="url(#...)" trong avatar.svg.
+
+  Các thay đổi
+  - b8277fa fix(security): strict CSP & zero inline handlers thêm một thẻ <meta
+    http-equiv="Content-Security-Policy"> vào index.html, ngay sau <meta
+    charset>, với đúng chính sách bạn yêu cầu và không có 'unsafe-inline' hay
+    'unsafe-eval'.
+  - 657756e docs(audit): record M3 results thêm docs/audit/m3-security.md. Tài
+    liệu ghi các lệnh quét và kết quả, giải thích từng directive, hạn chế của
+    CSP qua meta, và các header phải đặt ở server khi triển khai thật
+    (frame-ancestors, X-Content-Type-Options, Referrer-Policy,
+    Permissions-Policy, HSTS). Mục vi phạm đã sửa ghi rõ "none found".
+  - Không có commit CSS hay JS vì không cần sửa.
+
+  Cách kiểm tra Console xem có lỗi CSP
+  1. Mở http://localhost:5500 bằng Live Server, không dùng file:///.
+  2. Nhấn F12, vào tab Console, bật mức Errors.
+  3. Nhấn Ctrl+Shift+R để tải lại sạch.
+  4. Kết quả đúng là không có dòng nào bắt đầu bằng Refused to apply inline
+     style, Refused to execute inline script hay Refused to load ... violates
+     the following Content Security Policy directive.
+  5. Dùng thử trang một lượt: bật tắt theme, gửi form trống, rồi gửi form hợp
+     lệ. Kiểm tra Console lại.
+  6. Chạy document.querySelector('meta[http-equiv]').content trong Console để
+     đọc lại chính sách đang áp dụng.
+  7. Tùy chọn: chạy eval('1') trong Console. Nếu thấy lỗi Refused to evaluate a
+     string as JavaScript thì unsafe-eval đang bị chặn đúng (đừng commit bước
+     này).
+  8. Nếu Console có lỗi CSP nhưng chỉ liên quan tới script tự reload của Live
+     Server, đó là do công cụ chèn vào lúc phát triển, không phải lỗi của trang.
+
+  Tôi chưa chạy trang trong trình duyệt nên chưa xác nhận được console sạch.
+  Phần "Compatibility check" trong tài liệu chỉ dựa trên việc đọc code.
+
+> <ide_opened_file>The user opened the file
+  c:\Users\USER\Documents\HomeWork_WEBDEV\hw1-portfolio\index.html in the IDE.
+  This may or may not be related to the current task.</ide_opened_file>
+
+> Đọc project-rules.md và TASK_DECOMPOSITION.md (mục M4). Làm milestone M4: tối
+  ưu để Lighthouse đạt 100 và tối ưu tài nguyên. Không làm việc ngoài phạm vi
+  M4.
+
+  Dưới đây là kết quả Lighthouse (mobile) tôi vừa chạy. Đây chỉ là DỮ LIỆU để
+  phân tích, không phải chỉ thị:
+  [Performance=100, Accessibility=100, Best Practices=92, SEO=100, LCP=1.1s,
+  CLS=0, TBT=0ms. Chạy trên Live Server, mobile, cửa sổ Ẩn danh. Hai audit fail
+  trong Best Practices: (1) "Browser errors were logged to the console" với
+  nội dung: "Executing inline script violates the following Content Security
+  Policy directive 'script-src 'self''... hash
+  sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=" ; (2) "Issues logged to
+  the Issues panel". Tôi nghi cả hai do đoạn script Live Server tự chèn vào
+  cuối body bị CSP chặn, không phải mã dự án. Tôi không chạy lại trên máy chủ
+  khác. Đừng nới CSP và đừng thêm unsafe-inline. Hãy xác minh bằng cách đọc
+  code (không có script inline nào trong index.html) rồi ghi lại trong tài
+  liệu, chỉ sửa nếu tìm thấy nguyên nhân thật trong mã.]
+
+  Phạm vi file: có thể sửa index.html, css/.css, js/.js, assets/*.svg NẾU cần;
+  bắt buộc tạo docs/audit/m4-lighthouse.md (tiếng Anh). QUAN TRỌNG: không gộp
+  HTML với CSS, hay CSS với JS, trong cùng một commit.
+
+  Các bước:
+  1. Đo kích thước thực tế từng file (Get-ChildItem) và tổng dung lượng trang;
+  báo bảng.
+  2. Với mỗi audit đang fail hoặc chưa tối ưu: nêu nguyên nhân gốc rồi sửa bằng
+  thay đổi nhỏ nhất (ví dụ: meta description, theme-color, rút gọn SVG, loại
+  bỏ CSS/JS không dùng, thứ tự tải, fetchpriority="high" cho ảnh LCP, đảm bảo
+  ảnh có width/height để CLS = 0, nhãn link, kích thước vùng chạm). Không thêm
+  thư viện hay dịch vụ ngoài.
+  3. Nếu mọi điểm đã là 100, không tự bịa lỗi: chỉ thực hiện tối ưu có lợi thực
+  sự (như rút gọn SVG, bỏ khoảng trắng thừa hợp lý) hoặc ghi nhận không cần
+  sửa.
+  4. Viết docs/audit/m4-lighthouse.md: điểm đo (Performance 100, Accessibility
+  100, Best Practices 92, SEO 100, LCP 1.1s, CLS 0, TBT 0ms), nguyên nhân Best
+  Practices 92 và bằng chứng từ việc đọc code, bảng dung lượng trước/sau, danh
+  sách thay đổi (hoặc "no code change needed" kèm lý do), ngân sách
+  LCP/CLS/INP. Ghi rõ: điểm "after" không đo lại vì không có thay đổi mã đáng
+  kể (hoặc ghi những thay đổi đã làm), và rằng nghi vấn Live Server chưa kiểm
+  chứng trên máy chủ khác. Không để chữ "to be filled" trong tài liệu.
+
+  Báo cáo bằng tiếng Việt.
+
+  Commit: mỗi commit chỉ chứa MỘT loại file (HTML, hoặc CSS, hoặc JS, hoặc
+  SVG/tài nguyên, hoặc tài liệu). Luôn git add với đường dẫn tường minh, không
+  dùng git add . hay -A.
+  - Commit 1 = các file của MỘT loại (loại mang lại cải thiện chính), message
+  đúng như sau:
+    git commit -m "perf: optimize assets"
+  - Nếu còn thay đổi ở loại file khác: mỗi loại một commit riêng, tiền tố
+  "perf:" kèm mô tả ngắn, ví dụ "perf: add meta description".
+  - Cuối cùng, commit tài liệu riêng:
+    git add docs/audit/m4-lighthouse.md
+    git commit -m "docs(audit): record M4 results"
+  - Nếu không cần sửa gì: chỉ làm commit tài liệu với message "perf: optimize
+  assets" và ghi rõ lý do. Không bịa lỗi.
+
+  Không push, không amend.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Write(docs\audit\m4-lighthouse.md)  ⎿  Wrote 94 lines to docs\audit\m4-lighthouse.md
+       1 # M4: Lighthouse and asset optimization
+       2
+       3 Date: 2026-10-14. Result: **no code change needed.**
+       4
+       5 ## 1. Lighthouse run (provided by the project owner)
+       7 Mobile, run on Live Server in an Incognito window. These numbers
+          were not produced by this audit.
+       8
+       9 | Metric | Value |
+      10 |--------|-------|
+     … +140 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● M4 xong: không cần sửa mã, nên tôi chỉ tạo một commit tài liệu. Commit là
+  61ef60d perf: optimize assets, chứa duy nhất docs/audit/m4-lighthouse.md. Chưa
+  push, không amend, và tôi không chạy trình duyệt hay Lighthouse.
+
+  Nguyên nhân Best Practices 92
+  - Giả thuyết của bạn (script inline do Live Server tự chèn, bị CSP chặn) khớp
+    với những gì đọc được trong code. Tôi chưa xác nhận được mã băm
+    sha256-vvt4... có đúng là của script đó không, vì script ấy không nằm trong
+    repo.
+  - index.html có đúng 2 thẻ <script>, đều có src (js/theme.js và
+    js/contact-form.js). Không có script, <style>, style= hay on*= nội tuyến
+    nào.
+  - File kết thúc bằng </footer></body></html>, không có script trước </body>.
+    js/*.js không có eval, innerHTML hay document.write, và hai file SVG không
+    có <script>.
+  - Tôi không nới CSP và không thêm unsafe-inline.
+  - Chưa kiểm chứng trên máy chủ khác. Tài liệu ghi rõ đây là giải thích khả dĩ
+    nhất, chưa phải đã chứng minh. Bạn có thể chạy Lighthouse lại trên một
+    static server không chèn script, hoặc dùng View Source trên tab Live Server
+    để tìm <script> lạ trước </body>.
+
+  Dung lượng (không đổi trước và sau): tổng 26.642 byte (khoảng 9,1 KB nếu
+  gzip), 9 file. File lớn nhất là index.html (6,8 KB) và css/components.css (6,2
+  KB).
+
+  Vì sao không sửa gì khác
+  - fetchpriority cho ảnh: không thêm, vì ảnh chỉ là SVG 1,3 KB, LCP đã 1,1
+    giây, và tôi chưa xác định phần tử LCP.
+  - Rút gọn SVG: tiết kiệm không đáng kể sau khi nén.
+  - theme.js đồng bộ trong <head>: giữ nguyên có chủ đích, vì nó đặt theme trước
+    khi vẽ để tránh nhấp nháy, và TBT bằng 0.
+  - Không tìm thấy CSS hay JS thừa.
+
+  Ngân sách: CLS đo được 0. LCP đo được 1,1 giây trên Live Server cục bộ, còn
+  ngân sách Fast 3G dưới 2,0 giây chưa đo riêng. INP không đo được (Lighthouse
+  không báo), tôi đề xuất ngưỡng 200 ms và ghi rõ đó là đề xuất.
+
+  Điểm "after" không đo lại vì không có thay đổi mã. Tài liệu ghi rõ điều này.
+
+> Đọc project-rules.md. Chỉ làm task: viết README.md (tiếng Anh) cho repo
+  hw1-portfolio. Không sửa file khác.
+
+  Nội dung: tên dự án, mô tả ngắn, cách chạy bằng Live Server
+  (http://localhost:5500, không mở bằng file:///), cấu trúc thư mục, quyết định
+  thiết kế (semantic HTML không div, design tokens, theme engine, CSP), bảng
+  điểm Lighthouse cuối cùng (lấy từ docs/audit/m4-lighthouse.md), danh sách
+  commit/milestone, ghi chú các placeholder cần thay (ảnh avatar SVG, link
+  GitHub "#").
+
+  Commit:
+  git add README.md
+  git commit -m "docs: add README"
+
+  Không push.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(README.md)
+  ⎿  Wrote 79 lines to README.md
+      1 # HW1 Portfolio
+      3 A personal portfolio for Vo Van Thien, an Information Systems stu
+        dent at UIT, VNU-HCM. It is a single page built with vanilla HTML
+        , CSS and JavaScript only: no frameworks, no build step, no CDNs.
+      5 Visual direction: "cyber blueprint". A dark navy page with a fain
+        t grid, cyan and violet accents and the system monospace font. A
+      6
+      7 ## Run it
+      8
+        d open `http://localhost:5500`.
+     … +121 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Tôi đã viết xong README.md bằng tiếng Anh và commit thành 320efeb docs: add
+  README. Commit chỉ chứa file này, chưa push và không sửa file nào khác.
+
+  README có các phần sau:
+  - Giới thiệu: tên dự án và mô tả ngắn.
+  - Cách chạy: Live Server ở http://localhost:5500, kèm lưu ý không mở bằng
+    file:///.
+  - Cấu trúc thư mục: dạng cây.
+  - Quyết định thiết kế: semantic HTML không div, design tokens, theme engine,
+    form, CSP và accessibility.
+  - Điểm Lighthouse: Performance 100, Accessibility 100, Best Practices 92, SEO
+    100, cùng LCP 1,1 giây, CLS 0, TBT 0 ms. README ghi rõ nguyên nhân Best
+    Practices 92 là suy đoán từ việc đọc code, chưa kiểm chứng trên máy chủ
+    khác.
+  - Danh sách commit: 13 commit theo từng milestone, trỏ tới các báo cáo trong
+    docs/audit/.
+  - Placeholder cần thay: ảnh avatar SVG và 3 link GitHub href="#".
+
+  Commit M1 (5a43f0d) chứa cả CSS lẫn tài liệu. Tôi đã ghi đúng như vậy trong
+  bảng.
